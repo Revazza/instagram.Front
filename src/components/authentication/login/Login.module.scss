@@ -1,0 +1,70 @@
+@import "../../../Variables.scss";
+
+.container {
+  width: 42%;
+  margin: 65px auto 0 auto;
+}
+.img_wrapper {
+  width: 100%;
+}
+.form_wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 40px;
+}
+.img_form_container {
+  display: flex;
+}
+.form_account_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  width: 100%;
+  h1 {
+    color: rgb(0, 0, 0);
+    font-family: $fontLobster;
+    font-size: 50px;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 32px;
+  }
+  box-sizing: border-box;
+  padding: 0 44px 24px 44px;
+}
+
+.inputs {
+  margin-top: 30px;
+}
+
+.submit_btn {
+  margin-top: 20px;
+  button {
+    font-size: 13px;
+  }
+}
+
+.forgot_password {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.already_have_account {
+  margin-top: 11px;
+  padding: 25px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 14px;
+}
+.errors {
+  p {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: $errorRed;
+  }
+}

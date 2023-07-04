@@ -1,0 +1,65 @@
+@import "../../../Variables.scss";
+
+.container {
+  width: 19%;
+  margin: 12px auto 0 auto;
+  padding: 30px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register_container h1 {
+  color: rgb(0, 0, 0);
+  font-family: $fontLobster;
+  font-size: 50px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.register_container p {
+  text-align: center;
+  font-size: 17px;
+  color: #606770;
+}
+
+.contact p {
+  font-size: 12px;
+}
+
+#terms {
+  margin-top: 12px;
+}
+
+.submit_btn {
+  margin-top: 13px;
+  width: 100%;
+}
+
+.link_to_login {
+  width: 19%;
+  margin: 13px auto 0 auto;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  p {
+    font-size: 13.5px;
+    font-weight: 100;
+  }
+  a {
+    color: $lightBlue;
+  }
+}
+
+.errors {
+  p {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: $errorRed;
+  }
+}
