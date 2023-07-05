@@ -38,8 +38,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
-    try {
+        try {
       const response = await api.post("/User/Login", inputs);
       if (response.data.status === 1) {
         setErrors(response.data.errors);

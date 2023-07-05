@@ -1,0 +1,25 @@
+@import "../../../Variables.scss";
+
+.container {
+  border-right: 1px solid $lightGray;
+  box-sizing: border-box;
+  padding: 40px 7px;
+  h1 {
+    @include InstagramHTag;
+    padding-left: 15px;
+    font-size: 25px;
+  }
+  position: relative;
+}
+
+.loose_tabs_container {
+  margin-top: 35px;
+
+}
+
+.home_tab_wrapper {
+}
+.home_tab {
+  position: relative;
+  bottom: 19px;
+}

@@ -4,9 +4,18 @@ $fontOpenSans: "Open Sans", sans-serif;
 $fontDancing: "Dancing Script", cursive;
 $fontLobster: "Lobster Two", cursive;
 
-$inputCardBorderColor: rgb(219, 219, 219);
-$inputLabelColor: rgb(133, 133, 133);
+$lightGray: rgb(219, 219, 219);
+$lightDarkGray: rgb(133, 133, 133);
+$lightestGray:rgba(219, 219, 219, 0.593);
 $darkBlue: rgba(0, 55, 107, 255);
 $lightBlue: rgba(0, 149, 246, 255);
 $lightBlueDisabled: rgba(76, 181, 249, 255);
 $errorRed: #ea5455;
+
+
+
+@mixin InstagramHTag{
+    color: rgb(0, 0, 0);
+    font-family: $fontLobster;
+    font-size: 30px;
+}

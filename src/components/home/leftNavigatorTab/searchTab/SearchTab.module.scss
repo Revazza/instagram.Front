@@ -1,0 +1,34 @@
+@import "../../../../Variables.scss";
+
+$topContainerHeight:17%;
+
+.container {
+  position: absolute;
+  height: 100vh;
+  width: 405px;
+  top: 0;
+  left: 73px;
+  border-top-right-radius: 17px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 42px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid $lightGray;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.top_container{
+  border-bottom: 1px solid $lightGray;
+  height: $topContainerHeight;
+  box-sizing: border-box;
+  padding: 20px;
+  font-size: 23px;
+  font-weight: bold;
+  margin-top: 2px;
+  
+}
+
+
+.bottom_container{
+  height: calc(100% - $topContainerHeight);
+  box-sizing: border-box;
+}

@@ -1,0 +1,51 @@
+@import "../../../../../Variables.scss";
+
+.links_container {
+  margin-top: 42px;
+}
+
+.link_wrapper {
+  box-sizing: border-box;
+  padding: 8px 15px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  p {
+    font-size: 15px;
+    margin-left: 17px;
+    text-transform: capitalize;
+  }
+  transition: 300ms;
+  cursor: pointer;
+  color: black !important;
+}
+
+.boldP {
+  font-weight: bolder;
+}
+
+.link_wrapper:hover,
+.link_wrapper p:hover,
+.link_wrapper img:hover {
+  background-color: $lightestGray;
+  transition: 300ms;
+}
+
+.link_wrapper:hover img,
+.link_wrapper p:hover img,
+.link_wrapper img:hover {
+  transform: scale(1.1);
+  transition: 300ms ease;
+}
+
+.link_wrapper img:hover {
+}
+
+.img_wrapper {
+  img {
+    width: 22px;
+    height: 22px;
+    transition: 300ms ease;
+  }
+}
