@@ -1,0 +1,26 @@
+@import "../../../../Variables.scss";
+
+.container {
+  cursor: pointer;
+  height: 100%;
+  
+}
+
+#recentP {
+  font-family: $fontSego;
+  margin: 17px 22px;
+  font-weight: 600;
+}
+.search_results {
+  overflow-y: auto;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 13px;
+  
+}
+.result_item {
+  height: 60px;
+}
+
+
+

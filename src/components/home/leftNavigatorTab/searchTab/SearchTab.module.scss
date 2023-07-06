@@ -1,6 +1,6 @@
 @import "../../../../Variables.scss";
 
-$topContainerHeight:17%;
+$topContainerHeight: 17%;
 
 .container {
   position: absolute;
@@ -16,19 +16,99 @@ $topContainerHeight:17%;
   box-sizing: border-box;
 }
 
-.top_container{
+.top_container {
   border-bottom: 1px solid $lightGray;
   height: $topContainerHeight;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 20px 20px 20px 10px;
   font-size: 23px;
   font-weight: bold;
   margin-top: 2px;
-  
+  p {
+    font-family: $fontSego;
+    margin-left: 10px;
+    font-weight: 600;
+  }
+  position: relative;
 }
 
+.search {
+  position: absolute;
+  bottom: 26px;
+  width: 90%;
+  height: 35px;
+  padding: 3px 0;
+  background-color: $lightestGray;
+  display: flex;
+  align-items: center;
 
-.bottom_container{
-  height: calc(100% - $topContainerHeight);
+  border-radius: 8px;
+  margin-left: 5px;
+}
+
+.img_wrapper {
+  width: 16%;
+  height: 100%;
+  text-align: center;
+  img {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.search_wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search_input {
+  width: 100%;
+  font-size: 15px;
+  font-family: $fontSego;
+  border: none;
+  outline: none;
+  font-weight: 100;
   box-sizing: border-box;
+  padding-right: 13px;
+  background-color: transparent;
+}
+
+.search-container:has(input:focus) .button {
+  visibility: hidden;
+}
+
+.bottom_container {
+  height: calc(100% - $topContainerHeight);
+}
+
+.search_input:focus-within .img_wrapper {
+  display: none;
+}
+
+.bottom_container {
+  box-sizing: border-box;
+}
+
+.btn {
+  border-radius: 100%;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 100%;
+    cursor: pointer;
+    height: 100%;
+  }
+  outline: none;
+}
+
+.search_input::-webkit-search-cancel-button {
+  display: none;
 }

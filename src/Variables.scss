@@ -3,19 +3,20 @@
 $fontOpenSans: "Open Sans", sans-serif;
 $fontDancing: "Dancing Script", cursive;
 $fontLobster: "Lobster Two", cursive;
+$fontSego: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
 $lightGray: rgb(219, 219, 219);
 $lightDarkGray: rgb(133, 133, 133);
-$lightestGray:rgba(219, 219, 219, 0.593);
+$lightestGray: rgba(219, 219, 219, 0.593);
+$theLightestGray: rgba(219, 219, 219, 0.3);// :D
 $darkBlue: rgba(0, 55, 107, 255);
 $lightBlue: rgba(0, 149, 246, 255);
 $lightBlueDisabled: rgba(76, 181, 249, 255);
+$secondaryColor: rgb(115, 115, 115);
 $errorRed: #ea5455;
 
-
-
-@mixin InstagramHTag{
-    color: rgb(0, 0, 0);
-    font-family: $fontLobster;
-    font-size: 30px;
+@mixin InstagramHTag {
+  color: rgb(0, 0, 0);
+  font-family: $fontLobster;
+  font-size: 30px;
 }

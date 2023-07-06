@@ -38,13 +38,14 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-        try {
+    try {
       const response = await api.post("/User/Login", inputs);
       if (response.data.status === 1) {
         setErrors(response.data.errors);
         return;
       }
       const token = response.data.payload.token;
+      api.defaults.headers["Authorization"] = `Bearer ${token}`;
       Cookies.set("token", token);
       navigate("/");
     } catch (error) {
