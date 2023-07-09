@@ -6,8 +6,8 @@ import ShrinkedTab from "./tabsLayout/shrinkedTab/ShrinkedTab";
 import { Link } from "react-router-dom";
 import SearchTab from "./searchTab/SearchTab";
 
-function LeftNavigatorTab() {
-  const [activeTab, setActiveTab] = useState(1);
+function LeftNavigatorTab({ tab }) {
+  const [activeTab, setActiveTab] = useState(tab || 1);
   const [tabs, setTabs] = useState([]);
 
   const isShrinked =

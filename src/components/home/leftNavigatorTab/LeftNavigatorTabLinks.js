@@ -42,7 +42,7 @@ export const tabs = [
     activeImgSrc: "/images/messages_active.png",
     inActiveImgSrc: "/images/messages_inactive.png",
     alt: "messages",
-    to: "/messages",
+    to: "/inbox",
   },
   {
     id: 6,

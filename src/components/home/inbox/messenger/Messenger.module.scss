@@ -1,0 +1,55 @@
+@import "../../../../Variables.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.create_message_wrapper {
+  width: 30%;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.img_wrapper {
+  text-align: center;
+  border: 2px solid black;
+  background-color: transparent;
+  width: 94px;
+  height: 94px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  img {
+    height: 50px;
+    width: 50px;
+  }
+  margin-bottom: 17px;
+}
+
+#primaryP {
+  font-size: 19px;
+  margin-bottom: 5px;
+}
+
+#secondaryP {
+  font-size: 13px;
+  margin-bottom: 13px;
+  color: $lightDarkGray;
+  font-weight: 100;
+}
+
+.btn_wrapper {
+  width: 28%;
+  margin: 0 auto;
+  button {
+    font-size: 11px;
+  }
+}
+
+
+

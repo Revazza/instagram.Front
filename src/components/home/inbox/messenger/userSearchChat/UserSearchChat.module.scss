@@ -1,0 +1,24 @@
+@import "../../../../../Variables.scss";
+
+.search_bar {
+  border-bottom: 1px solid $lightGray;
+  display: flex;
+  align-items: center;
+  padding: 25px 15px;
+}
+.to {
+  padding-right: 23px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.search_bar_wrapper {
+  height: 100%;
+}
+
+#input {
+  font-size: 14px;
+  outline: none;
+  border: none;
+}
+

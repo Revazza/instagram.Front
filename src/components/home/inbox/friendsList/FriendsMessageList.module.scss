@@ -1,0 +1,47 @@
+@import "../../../../Variables.scss";
+
+.container {
+  padding-top: 30px;
+  box-sizing: border-box;
+  border-right: 1px solid $lightGray;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.userName_wrapper {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  margin-left: 20px;
+}
+
+.messages_title_wrapper {
+  margin-top: 19px;
+  font-size: 15px;
+  font-weight: bolder;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+  margin-left: 20px;
+  box-sizing: border-box;
+}
+
+#messages_requestP {
+  font-size: 13px;
+  color: $lightDarkGray;
+}
+.friends_container {
+  margin-top: 10px;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}

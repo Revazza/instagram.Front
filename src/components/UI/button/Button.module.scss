@@ -16,4 +16,5 @@
 
 .button:disabled {
   background-color: $lightBlueDisabled;
+  cursor:not-allowed;
 }

@@ -1,0 +1,51 @@
+@import "../../../../../Variables.scss";
+
+.container {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.container:hover {
+  background-color: $theLightestGray;
+  transition: 300ms;
+  
+}
+
+.friend_message_wrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 5px 5px 5px 20px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.img_wrapper {
+  width: 53px;
+  height: 53px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  margin-right: 10px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#fullNameP {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+#lastMessageP {
+  margin-top: 5px;
+  font-size: 11px;
+  color: $lightDarkGray;
+}

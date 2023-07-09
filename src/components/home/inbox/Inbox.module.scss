@@ -1,0 +1,7 @@
+.container {
+  display: grid;
+  grid-template-columns: 4% 20.5% 75.5%;
+  height: 100vh;
+  box-sizing: border-box;
+  // overflow-y: hidden;
+}

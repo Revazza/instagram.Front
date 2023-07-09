@@ -8,6 +8,9 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import Home from "./routes/Home";
+import Inbox from "./routes/Inbox";
+import Messenger from "./components/home/inbox/messenger/Messenger";
+import Chat from "./components/home/inbox/messenger/chat/Chat";
 
 function App() {
   const navigate = useNavigate();
@@ -27,12 +30,17 @@ function App() {
       Cookies.remove("token");
       navigate("/auth/login");
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/inbox" element={<Inbox />}>
+          <Route index element={<Messenger />} />
+          <Route path=":id" element={<Chat />} />
+        </Route>
+
         <Route path="/auth" element={<Authentication />}>
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
