@@ -1,13 +1,18 @@
 import React from "react";
 import styles from "./FriendMessageItem.module.scss";
+import { useNavigate } from "react-router-dom";
 
 function FriendMessageItem({ chat }) {
-  console.log(chat);
+  const navigate = useNavigate();
   const handleChatClick = (e) => {
-    console.log(e.target.id);
+    navigate(`${chat.chatId}`);
   };
   return (
-    <div className={styles.container} id={chat?.userId} onClick={handleChatClick}>
+    <div
+      className={styles.container}
+      id={chat?.userId}
+      onClick={handleChatClick}
+    >
       <div className={styles.friend_message_wrapper}>
         <div className={styles.img_wrapper}>
           <img src="/images/reels_active.png" alt="reels" />

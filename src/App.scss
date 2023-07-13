@@ -1,4 +1,4 @@
-@import './Variables.scss';
+@import "./Variables.scss";
 
 *,
 body,
@@ -8,12 +8,13 @@ html {
   font-family: $fontOpenSans;
 }
 
-a{
+a {
   text-decoration: none;
   color: $darkBlue;
   margin: 0;
   padding: 0;
 }
 
-.App{
+textarea {
+  resize: none;
 }

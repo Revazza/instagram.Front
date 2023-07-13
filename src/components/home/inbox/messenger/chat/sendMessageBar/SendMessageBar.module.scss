@@ -1,0 +1,37 @@
+@import "../../../../../../Variables.scss";
+
+.container {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+.input_container {
+  border: 1px solid $lightDarkGray;
+  width: 100%;
+  border-radius: 30px;
+  box-sizing: border-box;
+  padding: 0 6px;
+}
+
+.msg_input_wrapper {
+  display: flex;
+  padding: 10px;
+}
+
+.input {
+  width: 100%;
+  font-size: 15px;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  padding-left: 13px;
+  height: 20px;
+}
+
+.input::placeholder {
+  color: $lightDarkGray;
+  font-size: 14px;
+}

@@ -1,10 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./UserProfile.module.scss";
-function UserProfile({ className, user }) {
+function UserProfile({ className, user, children }) {
   const navigate = useNavigate();
 
-  console.log(user);
   const handleProfileClick = (e) => {
     const userName = user?.userName;
     navigate(`/${userName}`);
@@ -24,12 +23,13 @@ function UserProfile({ className, user }) {
       </div>
       <div className={styles.info}>
         <div className={styles.username}>
-          <p>shilstone_art</p>
+          <p>{user?.userName || "shilstone_art"}</p>
         </div>
         <div className={styles.additional_info}>
-          <p>Robbie Shilstone</p>
+          <p>{user?.fullName || "Robbie Shilstone"}</p>
         </div>
       </div>
+      {children}
     </div>
   );
 }

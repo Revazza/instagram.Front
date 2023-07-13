@@ -1,0 +1,40 @@
+@import "../../../../../../../Variables.scss";
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  min-width: fit-content;
+  max-width: 40%;
+  word-break: break-all;
+  border-radius: 17px;
+  padding: 7px 10px;
+  margin-top: 5px;
+  p {
+    font-size: 14px;
+  }
+}
+
+#userMsg {
+  color: white;
+  display: flex;
+  justify-content: right;
+  .wrapper {
+    background-color: rgb(55, 151, 240);
+  }
+  margin-top: 5px;
+}
+
+#participantMsg {
+  color: rgba(0, 0, 0, 0.9);
+  .wrapper {
+    background-color: $lightGray;
+  }
+  margin-top: 5px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+}
+
