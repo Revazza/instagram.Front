@@ -2,11 +2,15 @@ import React from "react";
 import styles from "./FriendMessageItem.module.scss";
 import { useNavigate } from "react-router-dom";
 
-function FriendMessageItem({ chat }) {
+function FriendMessageItem({ currentUserId, chat }) {
   const navigate = useNavigate();
   const handleChatClick = (e) => {
     navigate(`${chat.chatId}`);
   };
+  console.log(chat);
+  const isCurrentUserLastMessageAuthor =
+    chat?.lastMessageAuthorId === currentUserId;
+  console.log(isCurrentUserLastMessageAuthor);
   return (
     <div
       className={styles.container}
@@ -19,7 +23,10 @@ function FriendMessageItem({ chat }) {
         </div>
         <div className={styles.friend_info_wrapper}>
           <p id={styles.fullNameP}>{chat?.userName}</p>
-          <p id={styles.lastMessageP}>{chat?.lastMessage || "No messages"}</p>
+          <p id={styles.lastMessageP}>
+            {isCurrentUserLastMessageAuthor && "You: "}
+            {chat?.lastMessage || "No messages"}
+          </p>
         </div>
       </div>
     </div>

@@ -8,8 +8,10 @@ import FriendsMessageList from "../components/home/inbox/friendsList/FriendsMess
 
 function Inbox() {
   const [decodedToken, setDecodedToken] = useState("");
-
   const navigate = useNavigate();
+
+  
+
 
   useEffect(() => {
     const token = Cookies.get("token");

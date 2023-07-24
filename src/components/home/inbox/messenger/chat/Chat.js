@@ -5,12 +5,20 @@ import ChatMessages from "./chatMessages/ChatMessages";
 import SendMessageBar from "./sendMessageBar/SendMessageBar";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { CHAT_HUB_URL, api } from "../../../../../Api";
+import ChatHubConnector from "../../../../../store/hubs/ChatHubConnector";
 
 function Chat() {
   const [connection, setConnection] = useState(null);
   const [chat, setChat] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
+
+  const getConnection = (connection) => {
+    setConnection(connection);
+    connection.invoke("JoinChat", id);
+  };
+
+  const connector = ChatHubConnector.getInstance(getConnection);
 
   useEffect(() => {
     if (!id) {
@@ -23,25 +31,6 @@ function Chat() {
       .catch((err) => console.log("error: ", err))
       .finally(() => setIsLoading(false));
   }, [id]);
-
-  useEffect(() => {
-    const connect = new HubConnectionBuilder()
-      .withUrl(CHAT_HUB_URL)
-      .configureLogging(LogLevel.Information)
-      .withAutomaticReconnect()
-      .build();
-
-    setConnection(connect);
-  }, []);
-
-  useEffect(() => {
-    if (!connection) {
-      return;
-    }
-    connection.start().then(() => {
-      connection.invoke("JoinChat", id);
-    });
-  }, [connection]);
 
   const showChat = !isLoading && chat;
 
@@ -67,10 +56,10 @@ function Chat() {
             </div>
           </div>
           <div className={styles.chat_messages}>
-            <ChatMessages connection={connection} chat={chat} />
+            <ChatMessages connection={connector?.connection} chat={chat} />
           </div>
           <div className={styles.send_message_bar}>
-            <SendMessageBar connection={connection} />
+            <SendMessageBar connection={connector?.connection} chatId={chat?.id} />
           </div>
         </React.Fragment>
       )}

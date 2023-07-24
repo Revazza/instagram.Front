@@ -32,12 +32,11 @@ function ChatMessages({ connection, chat }) {
   }, [connection]);
 
   const handleMessageReceived = (message) => {
-    setMessages((prevMessages) => [...prevMessages, message]);
+    setMessages((prevMessages) => [message, ...prevMessages]);
   };
 
   const showParticipantProfile = messages.length === 0;
 
-  console.log(messages);
   return (
     <div className={styles.container}>
       {showParticipantProfile && (
@@ -54,19 +53,16 @@ function ChatMessages({ connection, chat }) {
         </div>
       )}
       <div className={styles.messages_container}>
-        {messages
-          .slice(0)
-          .reverse()
-          .map((msg, index) => {
-            return (
-              <MessageItem
-                key={msg.messageId}
-                participantId={participant?.id}
-                msg={msg}
-                ref={index === messages.length - 1 ? lastMessageRef : null}
-              />
-            );
-          })}
+        {messages.map((msg, index) => {
+          return (
+            <MessageItem
+              key={msg.messageId}
+              participantId={participant?.id}
+              msg={msg}
+              ref={index === 0 ? lastMessageRef : null}
+            />
+          );
+        })}
       </div>
     </div>
   );

@@ -7,11 +7,13 @@ import { api } from "../../../../Api";
 
 function FriendsMessageList({ token }) {
   const [chats, setChats] = useState([]);
+  const [currentUserId, setCurrentUserId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const token = Cookies.get("token");
     const credentials = jwtDecode(token);
+    setCurrentUserId(credentials.sub);
     const limit = 30;
     setIsLoading(true);
     api
@@ -35,10 +37,12 @@ function FriendsMessageList({ token }) {
         <p id={styles.messages_requestP}>Requests</p>
       </div>
       <div className={styles.friends_container}>
-        {isLoading && <img className={styles.img} src="/images/loading.gif" alt="Loading" />}
+        {isLoading && (
+          <img className={styles.img} src="/images/loading.gif" alt="Loading" />
+        )}
         {showChats &&
           chats.map((chat) => {
-            return <FriendMessageItem key={chat.userId} chat={chat} />;
+            return <FriendMessageItem key={chat.userId} currentUserId={currentUserId} chat={chat} />;
           })}
       </div>
     </div>

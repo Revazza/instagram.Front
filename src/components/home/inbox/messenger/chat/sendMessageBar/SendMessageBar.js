@@ -4,7 +4,7 @@ import Emojis from "../../../../../UI/emojis/Emojis";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 
-function SendMessageBar({ connection }) {
+function SendMessageBar({ connection, chatId }) {
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState();
 
@@ -24,7 +24,7 @@ function SendMessageBar({ connection }) {
       return;
     }
 
-    connection.invoke("SendMessage", message, userId);
+    connection.invoke("SendMessage", message, chatId);
     setMessage("");
   };
 
