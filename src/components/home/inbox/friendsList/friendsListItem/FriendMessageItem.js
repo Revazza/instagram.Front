@@ -7,10 +7,9 @@ function FriendMessageItem({ currentUserId, chat }) {
   const handleChatClick = (e) => {
     navigate(`${chat.chatId}`);
   };
-  console.log(chat);
   const isCurrentUserLastMessageAuthor =
     chat?.lastMessageAuthorId === currentUserId;
-  console.log(isCurrentUserLastMessageAuthor);
+    
   return (
     <div
       className={styles.container}

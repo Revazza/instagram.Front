@@ -29,7 +29,12 @@ function ChatMessages({ connection, chat }) {
       return;
     }
     connection.on("ReceiveMessage", handleMessageReceived);
+    connection.on("ReceiveNotification", handleNotificationReceived);
   }, [connection]);
+
+  const handleNotificationReceived = (notification) =>{
+    console.log("Notification: ", notification)
+  }
 
   const handleMessageReceived = (message) => {
     setMessages((prevMessages) => [message, ...prevMessages]);

@@ -59,7 +59,7 @@ function Chat() {
             <ChatMessages connection={connector?.connection} chat={chat} />
           </div>
           <div className={styles.send_message_bar}>
-            <SendMessageBar connection={connector?.connection} chatId={chat?.id} />
+            <SendMessageBar connection={connector?.connection} chatId={chat?.id} participant={chat?.participant} />
           </div>
         </React.Fragment>
       )}

@@ -1,32 +1,30 @@
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
-import { CHAT_HUB_URL } from "../../Api";
+import { NOTIFICATION_HUB_URL } from "../../Api";
 import Cookies from "js-cookie";
 
-class ChatHubConnector {
-  message = null;
-  connectionId = null;
-
-  constructor(setConnection) {
+class NotificationHubConnector {
+  constructor() {
     this.startConnection().then(() => {
-      console.log("SignalR ChatHub connection established");
-      setConnection(this.connection);
+      console.log("SignalR NotificationHub connection established");
     });
   }
 
-  static getInstance(setConnection) {
-    if (!ChatHubConnector.connection) {
-      ChatHubConnector.connection = new ChatHubConnector(setConnection);
-      return ChatHubConnector.connection;
+  static getInstance() {
+    if (!Cookies.get("token")) {
+      return null;
+    }
+    if (!NotificationHubConnector.connection) {
+      NotificationHubConnector.connection = new NotificationHubConnector();
     }
 
-    return ChatHubConnector.connection;
+    return NotificationHubConnector.connection;
   }
 
   async startConnection() {
     const token = Cookies.get("token");
 
     this.connection = new HubConnectionBuilder()
-      .withUrl(CHAT_HUB_URL, {
+      .withUrl(NOTIFICATION_HUB_URL, {
         accessTokenFactory: () => token,
       })
       .configureLogging(LogLevel.Information)
@@ -41,4 +39,4 @@ class ChatHubConnector {
   }
 }
 
-export default ChatHubConnector;
+export default NotificationHubConnector;

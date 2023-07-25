@@ -5,13 +5,13 @@ import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { Outlet, useNavigate } from "react-router-dom";
 import FriendsMessageList from "../components/home/inbox/friendsList/FriendsMessageList";
+import NotificationHubConnector from "../store/hubs/NotificationHubConnector";
 
 function Inbox() {
   const [decodedToken, setDecodedToken] = useState("");
   const navigate = useNavigate();
 
-  
-
+  const connector = NotificationHubConnector.getInstance();
 
   useEffect(() => {
     const token = Cookies.get("token");
