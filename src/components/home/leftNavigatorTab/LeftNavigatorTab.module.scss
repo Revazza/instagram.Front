@@ -1,23 +1,36 @@
 @import "../../../Variables.scss";
 
 .container {
-  border-right: 1px solid $lightGray;
+  width: 17%;
   box-sizing: border-box;
   padding: 40px 7px;
   h1 {
     @include InstagramHTag;
     padding-left: 15px;
     font-size: 25px;
+    position: relative;
+    bottom: 5px;
   }
   position: relative;
+
+}
+
+.shrinked_container {
+  box-sizing: border-box;
+  margin-top: 41px;
+  width: 4%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
 }
 
 .loose_tabs_container {
-  margin-top: 35px;
-
+  margin-top: 37px;
+  margin-left: 4px;
 }
 
 .home_tab {
   position: relative;
-  bottom: 19px;
+  bottom: 24px;
 }

@@ -60,9 +60,9 @@ export const tabs = [
   },
   {
     id: 8,
-    name: "home",
+    name: "Profile",
     activeImgSrc: "/images/home_active.png",
     inActiveImgSrc: "/images/home_inactive.png",
-    alt: "home",
+    alt: "Profile",
   },
 ];

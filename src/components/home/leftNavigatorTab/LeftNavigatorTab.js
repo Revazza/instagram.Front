@@ -3,16 +3,28 @@ import styles from "./LeftNavigatorTab.module.scss";
 import { tabs as tabLinks, homeTab } from "./LeftNavigatorTabLinks";
 import LooseTab from "./tabsLayout/looseTab/LooseTab";
 import ShrinkedTab from "./tabsLayout/shrinkedTab/ShrinkedTab";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SearchTab from "./searchTab/SearchTab";
 import Notification from "../notification/Notification";
 
-function LeftNavigatorTab({ tab }) {
-  const [activeTab, setActiveTab] = useState(tab || 1);
+function LeftNavigatorTab() {
+  const [activeTab, setActiveTab] = useState(1);
   const [tabs, setTabs] = useState([]);
 
   const isShrinked =
     activeTab === 2 || activeTab === 4 || activeTab === 5 || activeTab === 6;
+
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    const foundTab = tabLinks.find(
+      (s) => s.to !== "/" && currentPath.includes(s?.to)
+    );
+    if (!foundTab) {
+      return;
+    }
+
+    setActiveTab(foundTab.id);
+  }, []);
 
   useEffect(() => {
     setTabs(tabLinks);
@@ -23,8 +35,12 @@ function LeftNavigatorTab({ tab }) {
     setActiveTab(id);
   };
 
+  const containerClass = isShrinked
+    ? styles.shrinked_container
+    : styles.container;
+
   return (
-    <div className={styles.container}>
+    <div className={containerClass}>
       <div className={styles.home_tab_wrapper}>
         {!isShrinked && (
           <Link to="/">

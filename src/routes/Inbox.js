@@ -25,7 +25,6 @@ function Inbox() {
 
   return (
     <div className={styles.container}>
-      <LeftNavigatorTab tab={5} />
       <FriendsMessageList token={decodedToken} />
       <Outlet />
     </div>

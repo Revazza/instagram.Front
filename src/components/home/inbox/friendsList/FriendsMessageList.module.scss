@@ -2,9 +2,12 @@
 
 .container {
   position: relative;
-  padding-top: 30px;
+  width: 21%;
+  padding-top: 38px;
   box-sizing: border-box;
+  border-left: 1px solid $lightGray;
   border-right: 1px solid $lightGray;
+
   box-sizing: border-box;
   overflow: hidden;
   z-index: 2;

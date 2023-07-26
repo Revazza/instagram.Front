@@ -12,6 +12,7 @@ import Inbox from "./routes/Inbox";
 import Messenger from "./components/home/inbox/messenger/Messenger";
 import Chat from "./components/home/inbox/messenger/chat/Chat";
 import NotificationHubConnector from "./store/hubs/NotificationHubConnector";
+import Main from "./components/home/main/Main";
 
 function App() {
   const navigate = useNavigate();
@@ -36,10 +37,12 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/inbox" element={<Inbox />}>
-          <Route index element={<Messenger />} />
-          <Route path=":id" element={<Chat />} />
+        <Route path="/" element={<Home />}>
+          <Route index element={<Main />}/>
+          <Route path="inbox" element={<Inbox />}>
+            <Route index element={<Messenger />} />
+            <Route path=":id" element={<Chat />} />
+          </Route>
         </Route>
 
         <Route path="/auth" element={<Authentication />}>
