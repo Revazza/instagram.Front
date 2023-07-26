@@ -11,7 +11,6 @@ import Home from "./routes/Home";
 import Inbox from "./routes/Inbox";
 import Messenger from "./components/home/inbox/messenger/Messenger";
 import Chat from "./components/home/inbox/messenger/chat/Chat";
-import NotificationHubConnector from "./store/hubs/NotificationHubConnector";
 import Main from "./components/home/main/Main";
 
 function App() {

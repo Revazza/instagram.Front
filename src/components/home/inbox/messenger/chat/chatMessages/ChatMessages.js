@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ChatMessages.module.scss";
 import UserProfile from "../../../../../UI/userProfile/UserProfile";
 import MessageItem from "./messageItem/MessageItem";
+import NotificationHubConnector from "../../../../../../store/hubs/NotificationHubConnector";
 
 function ChatMessages({ connection, chat }) {
   const [messages, setMessages] = useState([]);
   const [participant, setParticipant] = useState();
+
 
   const lastMessageRef = useRef(null);
 
@@ -29,15 +31,11 @@ function ChatMessages({ connection, chat }) {
       return;
     }
     connection.on("ReceiveMessage", handleMessageReceived);
-    connection.on("ReceiveNotification", handleNotificationReceived);
   }, [connection]);
 
-  const handleNotificationReceived = (notification) =>{
-    console.log("Notification: ", notification)
-  }
-
-  const handleMessageReceived = (message) => {
-    setMessages((prevMessages) => [message, ...prevMessages]);
+  const handleMessageReceived = (msg) => {
+    setMessages((prevMessages) => [msg, ...prevMessages]);
+    
   };
 
   const showParticipantProfile = messages.length === 0;

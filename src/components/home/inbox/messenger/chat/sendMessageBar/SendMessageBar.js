@@ -3,6 +3,7 @@ import styles from "./SendMessageBar.module.scss";
 import Emojis from "../../../../../UI/emojis/Emojis";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
+import ChatMessages from "../chatMessages/ChatMessages";
 
 function SendMessageBar({ connection, chatId, participant }) {
   const [message, setMessage] = useState("");
@@ -23,8 +24,8 @@ function SendMessageBar({ connection, chatId, participant }) {
     if (message.length === 0) {
       return;
     }
-
     connection.invoke("SendMessage", message, chatId, participant.id);
+
     setMessage("");
   };
 

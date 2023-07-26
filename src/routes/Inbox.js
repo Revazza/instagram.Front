@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
-import LeftNavigatorTab from "../components/home/leftNavigatorTab/LeftNavigatorTab";
 import styles from "../components/home/inbox/Inbox.module.scss";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import FriendsMessageList from "../components/home/inbox/friendsList/FriendsMessageList";
-import NotificationHubConnector from "../store/hubs/NotificationHubConnector";
+import { fetchUserChats } from "../store/reducers/notificationReducer";
 
 function Inbox() {
   const [decodedToken, setDecodedToken] = useState("");
   const navigate = useNavigate();
-
-  const connector = NotificationHubConnector.getInstance();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = Cookies.get("token");
     try {
       const decodedToken = jwtDecode(token);
+      const userId = jwtDecode(token).sub;
+      dispatch(fetchUserChats(userId, 30));
       setDecodedToken(decodedToken);
     } catch (error) {
       navigate("/auth/login");
     }
-  }, [navigate]);
+  }, [navigate, dispatch]);
 
   return (
     <div className={styles.container}>

@@ -3,8 +3,7 @@ import styles from "./Chat.module.scss";
 import { useParams } from "react-router-dom";
 import ChatMessages from "./chatMessages/ChatMessages";
 import SendMessageBar from "./sendMessageBar/SendMessageBar";
-import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
-import { CHAT_HUB_URL, api } from "../../../../../Api";
+import { api } from "../../../../../Api";
 import ChatHubConnector from "../../../../../store/hubs/ChatHubConnector";
 
 function Chat() {
@@ -59,7 +58,12 @@ function Chat() {
             <ChatMessages connection={connector?.connection} chat={chat} />
           </div>
           <div className={styles.send_message_bar}>
-            <SendMessageBar connection={connector?.connection} chatId={chat?.id} participant={chat?.participant} />
+            <SendMessageBar
+              connection={connector?.connection}
+              meessagesCount={chat?.chatMessages.length}
+              chatId={chat?.id}
+              participant={chat?.participant}
+            />
           </div>
         </React.Fragment>
       )}
