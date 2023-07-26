@@ -50,7 +50,6 @@ export const tabs = [
     activeImgSrc: "/images/notification_active.png",
     inActiveImgSrc: "/images/notification_inactive.png",
     alt: "notifications",
-    to: "/notifications",
   },
   {
     id: 7,

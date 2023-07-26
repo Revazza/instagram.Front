@@ -1,11 +1,13 @@
 @import "../../../../Variables.scss";
 
 .container {
+  position: relative;
   padding-top: 30px;
   box-sizing: border-box;
   border-right: 1px solid $lightGray;
   box-sizing: border-box;
   overflow: hidden;
+  z-index: 2;
 }
 
 .userName_wrapper {

@@ -1,0 +1,39 @@
+@import "../../../Variables.scss";
+
+$topContainerHeight: 9.8%;
+
+.container {
+  position: absolute;
+  height: 100vh;
+  width: 405px;
+  top: 0;
+  left: 75px;
+  border-top-right-radius: 17px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 15px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid $lightGray;
+  background-color: white;
+  box-sizing: border-box;
+  z-index: 9;
+  overflow: hidden;
+}
+
+.header_wrapper {
+  p {
+    font-family: $fontSego;
+    margin-top: 20px;
+    margin-left: 21px;
+    font-weight: bolder;
+    font-size: 24px;
+  }
+}
+
+.friend_request_wrapper {
+  height: $topContainerHeight;
+  display: flex;
+  align-items: center;
+}
+
+.remove_margins{
+  margin: 0;
+}

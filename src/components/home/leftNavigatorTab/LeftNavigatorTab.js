@@ -5,6 +5,7 @@ import LooseTab from "./tabsLayout/looseTab/LooseTab";
 import ShrinkedTab from "./tabsLayout/shrinkedTab/ShrinkedTab";
 import { Link } from "react-router-dom";
 import SearchTab from "./searchTab/SearchTab";
+import Notification from "../notification/Notification";
 
 function LeftNavigatorTab({ tab }) {
   const [activeTab, setActiveTab] = useState(tab || 1);
@@ -19,7 +20,6 @@ function LeftNavigatorTab({ tab }) {
 
   const handleSectionChange = (e) => {
     const id = +e.target.id;
-    console.log(id);
     setActiveTab(id);
   };
 
@@ -69,6 +69,7 @@ function LeftNavigatorTab({ tab }) {
         })}
       </div>
       {activeTab === 2 && <SearchTab />}
+      {activeTab === 6 && <Notification />}
     </div>
   );
 }
