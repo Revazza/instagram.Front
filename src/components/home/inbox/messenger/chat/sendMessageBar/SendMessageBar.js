@@ -3,16 +3,17 @@ import styles from "./SendMessageBar.module.scss";
 import Emojis from "../../../../../UI/emojis/Emojis";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
-import ChatMessages from "../chatMessages/ChatMessages";
 
-function SendMessageBar({ connection, chatId, participant }) {
+function SendMessageBar({ chat }) {
   const [message, setMessage] = useState("");
-  const [userId, setUserId] = useState();
+  const [user, setUser] = useState();
 
+  const connection = null;
+  
   useEffect(() => {
     const token = Cookies.get("token");
     const decodedJwt = jwtDecode(token);
-    setUserId(decodedJwt.sub);
+    setUser(decodedJwt);
   }, []);
 
   const handleMessageChange = (e) => {
@@ -24,7 +25,17 @@ function SendMessageBar({ connection, chatId, participant }) {
     if (message.length === 0) {
       return;
     }
-    connection.invoke("SendMessage", message, chatId, participant.id);
+    console.log(chat);
+    const request = {
+      message,
+      chatId: chat.id,
+      receiverId: chat.participant.id,
+      senderFullName: user.fullName,
+      senderUserName: user.userName,
+      chatName: chat.chatName,
+    };
+    console.log("Request: ", request);
+    connection.invoke("SendMessage", request);
 
     setMessage("");
   };

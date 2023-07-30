@@ -7,13 +7,13 @@ function FriendMessageItem({ currentUserId, chat }) {
   const handleChatClick = (e) => {
     navigate(`${chat.chatId}`);
   };
+
   const isCurrentUserLastMessageAuthor =
     chat?.lastMessageAuthorId === currentUserId;
-    
+
   return (
     <div
       className={styles.container}
-      id={chat?.userId}
       onClick={handleChatClick}
     >
       <div className={styles.friend_message_wrapper}>
@@ -21,7 +21,7 @@ function FriendMessageItem({ currentUserId, chat }) {
           <img src="/images/reels_active.png" alt="reels" />
         </div>
         <div className={styles.friend_info_wrapper}>
-          <p id={styles.fullNameP}>{chat?.userName}</p>
+          <p id={styles.fullNameP}>{chat?.chatName}</p>
           <p id={styles.lastMessageP}>
             {isCurrentUserLastMessageAuthor && "You: "}
             {chat?.lastMessage || "No messages"}

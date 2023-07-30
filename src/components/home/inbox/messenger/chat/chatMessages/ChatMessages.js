@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ChatMessages.module.scss";
 import UserProfile from "../../../../../UI/userProfile/UserProfile";
 import MessageItem from "./messageItem/MessageItem";
-import NotificationHubConnector from "../../../../../../store/hubs/NotificationHubConnector";
 
-function ChatMessages({ connection, chat }) {
+function ChatMessages({ chat }) {
   const [messages, setMessages] = useState([]);
   const [participant, setParticipant] = useState();
 
-
+  const connection = null;
   const lastMessageRef = useRef(null);
+
 
   useEffect(() => {
     if (lastMessageRef.current) {
@@ -33,12 +33,12 @@ function ChatMessages({ connection, chat }) {
     connection.on("ReceiveMessage", handleMessageReceived);
   }, [connection]);
 
-  const handleMessageReceived = (msg) => {
-    setMessages((prevMessages) => [msg, ...prevMessages]);
-    
+  const handleMessageReceived = (received) => {
+    const { message } = received;
+    setMessages((prevMessages) => [message, ...prevMessages]);
   };
 
-  const showParticipantProfile = messages.length === 0;
+  const showParticipantProfile = messages?.length === 0;
 
   return (
     <div className={styles.container}>
@@ -56,7 +56,7 @@ function ChatMessages({ connection, chat }) {
         </div>
       )}
       <div className={styles.messages_container}>
-        {messages.map((msg, index) => {
+        {messages?.map((msg, index) => {
           return (
             <MessageItem
               key={msg.messageId}

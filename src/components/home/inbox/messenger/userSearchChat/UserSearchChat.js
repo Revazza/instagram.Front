@@ -21,7 +21,6 @@ function UserSearchChat({ handlePopUpClose, open }) {
   };
 
   const handleOpenChatClick = (user) => {
-    console.log("user: ", user);
     const token = Cookies.get("token");
     const credentials = jwtDecode(token);
     const request = {

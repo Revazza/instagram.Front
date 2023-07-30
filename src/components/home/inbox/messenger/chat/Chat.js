@@ -4,20 +4,13 @@ import { useParams } from "react-router-dom";
 import ChatMessages from "./chatMessages/ChatMessages";
 import SendMessageBar from "./sendMessageBar/SendMessageBar";
 import { api } from "../../../../../Api";
-import ChatHubConnector from "../../../../../store/hubs/ChatHubConnector";
+
 
 function Chat() {
-  const [connection, setConnection] = useState(null);
+  console.log("chat is running");
   const [chat, setChat] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-
-  const getConnection = (connection) => {
-    setConnection(connection);
-    connection.invoke("JoinChat", id);
-  };
-
-  const connector = ChatHubConnector.getInstance(getConnection);
 
   useEffect(() => {
     if (!id) {
@@ -26,7 +19,10 @@ function Chat() {
     setIsLoading(true);
     api
       .get(`/Chat/GetChatWithMessages?chatId=${id}`)
-      .then((res) => setChat(res.data.payload))
+      .then((res) => {
+        const chat = res.data.payload;
+        setChat(chat);
+      })
       .catch((err) => console.log("error: ", err))
       .finally(() => setIsLoading(false));
   }, [id]);
@@ -55,15 +51,10 @@ function Chat() {
             </div>
           </div>
           <div className={styles.chat_messages}>
-            <ChatMessages connection={connector?.connection} chat={chat} />
+            <ChatMessages chat={chat} />
           </div>
           <div className={styles.send_message_bar}>
-            <SendMessageBar
-              connection={connector?.connection}
-              meessagesCount={chat?.chatMessages.length}
-              chatId={chat?.id}
-              participant={chat?.participant}
-            />
+            <SendMessageBar chat={chat} />
           </div>
         </React.Fragment>
       )}

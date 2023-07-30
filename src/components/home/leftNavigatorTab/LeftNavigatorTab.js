@@ -6,6 +6,7 @@ import ShrinkedTab from "./tabsLayout/shrinkedTab/ShrinkedTab";
 import { Link, useParams } from "react-router-dom";
 import SearchTab from "./searchTab/SearchTab";
 import Notification from "../notification/Notification";
+import ParentTab from "./tabsLayout/parentTab/ParentTab";
 
 function LeftNavigatorTab() {
   const [activeTab, setActiveTab] = useState(1);
@@ -65,19 +66,12 @@ function LeftNavigatorTab() {
       >
         {tabs.map((tab) => {
           const isActiveTab = activeTab === tab.id;
-          return isShrinked ? (
-            <ShrinkedTab
+          return (
+            <ParentTab
               key={tab.id}
+              isShrinked={isShrinked}
               isActiveTab={isActiveTab}
-              onSectionChange={handleSectionChange}
-              tab={tab}
-              to={tab?.to}
-            />
-          ) : (
-            <LooseTab
-              key={tab.id}
-              isActiveTab={isActiveTab}
-              onSectionChange={handleSectionChange}
+              handleSectionChange={handleSectionChange}
               tab={tab}
               to={tab?.to}
             />

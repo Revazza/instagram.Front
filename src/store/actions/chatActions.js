@@ -1,12 +1,9 @@
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 
-export const handleMessageNotification = (newMsg, chat) => {
+export const handleMessageReceive = (received) => {
   return {
     type: RECEIVE_MESSAGE,
-    payload: {
-      msg: newMsg,
-      chat,
-    },
+    payload: received,
   };
 };
 
@@ -17,4 +14,8 @@ export const handleChatsFetch = (chats) => {
     type: FETCH_CHATS,
     payload: chats,
   };
+};
+
+export const getChatById = (state, chatId) => {
+  return state.chats?.chats?.find((chat) => chat?.chatId === chatId) || null;
 };

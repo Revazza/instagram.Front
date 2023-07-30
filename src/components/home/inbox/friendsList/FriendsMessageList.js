@@ -3,32 +3,42 @@ import styles from "./FriendsMessageList.module.scss";
 import FriendMessageItem from "./friendsListItem/FriendMessageItem";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
-import { useSelector, useDispatch } from "react-redux";
-import { handleMessageNotification } from "../../../../store/actions/messageActions";
-import NotificationHubConnector from "../../../../store/hubs/NotificationHubConnector";
+import { api } from "../../../../Api";
 
-function FriendsMessageList({ token }) {
-  const [currentUserId, setCurrentUserId] = useState("");
+export const FriendMessageListWrapper = () => {
   const [isLoading, setIsLoading] = useState(false);
-
-  const chats = useSelector((state) => state.notifications.chats);
-
 
   useEffect(() => {
     const token = Cookies.get("token");
     const credentials = jwtDecode(token);
-    setCurrentUserId(credentials.sub);
+    setIsLoading(true);
+    api
+      .get(`/Chat/GetUserChats?userId=${credentials.sub}&limit=${30}`)
+      .then((res) => {})
+      .catch((err) => console.log("GetUserChats Error: ", err))
+      .finally(() => setIsLoading(false));
   }, []);
 
-  console.log("CHATS: ", chats);
+  return <FriendsMessageList isLoading={isLoading} />;
+};
 
-  const showChats = !isLoading && chats.length !== 0;
+function FriendsMessageList({ isLoading }) {
+  const [currentUser, setCurrentUser] = useState();
+
+  const chats = [];
+  useEffect(() => {
+    const token = Cookies.get("token");
+    const credentials = jwtDecode(token);
+    setCurrentUser(credentials);
+  }, []);
+
+  const showChats = !isLoading && chats?.length !== 0;
 
   return (
     <div className={styles.container}>
       <div className={styles.top_container}>
         <div className={styles.userName_wrapper}>
-          <h1>{token?.userName}</h1>
+          <h1>{currentUser?.userName}</h1>
         </div>
       </div>
       <div className={styles.messages_title_wrapper}>
@@ -40,11 +50,11 @@ function FriendsMessageList({ token }) {
           <img className={styles.img} src="/images/loading.gif" alt="Loading" />
         )}
         {showChats &&
-          chats.map((chat) => {
+          chats?.map((chat) => {
             return (
               <FriendMessageItem
-                key={chat.userId}
-                currentUserId={currentUserId}
+                key={chat.chatId}
+                currentUserId={currentUser?.sub}
                 chat={chat}
               />
             );

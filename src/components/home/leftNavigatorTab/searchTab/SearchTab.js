@@ -16,7 +16,6 @@ function SearchTab() {
   const handleSearchValueChange = (e) => {
     const value = e.target.value;
     if (value === "") {
-      console.log("I am here");
       setIsLoading(false);
     }
     setSearchValue(value);

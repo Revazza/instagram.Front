@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "../components/home/inbox/Inbox.module.scss";
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import FriendsMessageList from "../components/home/inbox/friendsList/FriendsMessageList";
-import { fetchUserChats } from "../store/reducers/notificationReducer";
+import { Outlet } from "react-router-dom";
+import { FriendMessageListWrapper } from "../components/home/inbox/friendsList/FriendsMessageList";
+import useAuthRedirerct from "../hooks/useAuthRedirerct";
 
 function Inbox() {
-  const [decodedToken, setDecodedToken] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const token = Cookies.get("token");
-    try {
-      const decodedToken = jwtDecode(token);
-      const userId = jwtDecode(token).sub;
-      dispatch(fetchUserChats(userId, 30));
-      setDecodedToken(decodedToken);
-    } catch (error) {
-      navigate("/auth/login");
-    }
-  }, [navigate, dispatch]);
+  useAuthRedirerct();
 
   return (
     <div className={styles.container}>
-      <FriendsMessageList token={decodedToken} />
+      <FriendMessageListWrapper />
       <Outlet />
     </div>
   );
