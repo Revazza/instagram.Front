@@ -8,7 +8,6 @@ import ChatHubConnector from "../../../../../../store/hubs/ChatHubConnector";
 function SendMessageBar({ chat }) {
   const [message, setMessage] = useState("");
   const [user, setUser] = useState();
-
   const connector = ChatHubConnector.getInstance();
 
   useEffect(() => {
@@ -26,7 +25,6 @@ function SendMessageBar({ chat }) {
     if (message.length === 0) {
       return;
     }
-    console.log(chat);
     const request = {
       message,
       chatId: chat.id,
@@ -35,10 +33,7 @@ function SendMessageBar({ chat }) {
       senderUserName: user.userName,
       chatName: chat.chatName,
     };
-    console.log("Request: ", request);
-    console.log(connector);
     connector.connection.invoke("SendMessage", request);
-
     setMessage("");
   };
 

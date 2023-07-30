@@ -1,17 +1,17 @@
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 
-export const handleMessageReceive = (received) => {
+export const updateChatList = (received) => {
   return {
     type: RECEIVE_MESSAGE,
     payload: received,
   };
 };
 
-export const FETCH_CHATS = "INITIALIZE_CHATS";
+export const INITIALIZE_CHATS = "INITIALIZE_CHATS";
 
-export const handleChatsFetch = (chats) => {
+export const handleChatsInitialization = (chats) => {
   return {
-    type: FETCH_CHATS,
+    type: INITIALIZE_CHATS,
     payload: chats,
   };
 };

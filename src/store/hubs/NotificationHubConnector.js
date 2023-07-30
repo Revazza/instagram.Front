@@ -9,11 +9,14 @@ class NotificationHubConnector {
     });
   }
 
-  static getInstance() {
-    if (!NotificationHubConnector.connection) {
-      NotificationHubConnector.connection = new NotificationHubConnector();
+  static createConnection() {
+    if (NotificationHubConnector.connection) {
+      return;
     }
+    NotificationHubConnector.connection = new NotificationHubConnector();
+  }
 
+  static getInstance() {
     return NotificationHubConnector.connection;
   }
 

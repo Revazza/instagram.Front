@@ -5,10 +5,14 @@ import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { api } from "../../../../Api";
 import LoadingScreen from "../../../UI/loading/LoadingScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { handleChatsInitialization } from "../../../../store/actions/chatActions";
 
 export const FriendMessageListWrapper = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [chats, setChats] = useState([]);
+
+  const dispatch = useDispatch();
+  const chats = useSelector((state) => state.chats.chats);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -17,7 +21,8 @@ export const FriendMessageListWrapper = () => {
     api
       .get(`/Chat/GetUserChats?userId=${credentials.sub}&limit=${30}`)
       .then((res) => {
-        setChats(res.data.payload.chats);
+        const chats = res.data.payload.chats;
+        dispatch(handleChatsInitialization(chats));
       })
       .catch((err) => console.log("GetUserChats Error: ", err))
       .finally(() => setIsLoading(false));
@@ -49,7 +54,7 @@ function FriendsMessageList({ isLoading, chats }) {
         <p id={styles.messages_requestP}>Requests</p>
       </div>
       <div className={styles.friends_container}>
-        {isLoading && <LoadingScreen height={50} width={50}/>}
+        {isLoading && <LoadingScreen height={50} width={50} />}
         {showChats &&
           chats?.map((chat) => {
             return (

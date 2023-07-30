@@ -1,57 +1,43 @@
-import {
-  FETCH_CHATS,
-  RECEIVE_MESSAGE,
-} from "../actions/chatActions";
+import { INITIALIZE_CHATS, RECEIVE_MESSAGE } from "../actions/chatActions";
 
 const initialState = {
   chats: [],
 };
 
 const chatReducer = (state = initialState, action) => {
-  if (action.type === FETCH_CHATS) {
+  if (action.type === INITIALIZE_CHATS) {
     return { chats: action.payload };
   }
+
   if (action.type === RECEIVE_MESSAGE) {
-    const received = action.payload;
-    const { message } = received;
-    console.log("Chats: ", state.chats);
-    console.log("received: ", received);
-    const foundedChat = state.chats.find(
+    const message = action.payload;
+    const chatIndex = state.chats.findIndex(
       (c) => c.chatId === message.originalChatId
     );
-    if (foundedChat) {
-      const chatCopy = { ...foundedChat };
-      chatCopy.lastActivity = message.createdAt;
-      chatCopy.lastMessage = message.messageText;
-      chatCopy.lastMessageAuthorId = message.senderId;
-      console.log("ChatCopy: ", chatCopy);
-      const updateChats = state.chats.map((c) => {
-        if (c.chatId === message.originalChatId) {
-          return chatCopy;
-        }
-        return c;
-      });
-      console.log("Updated chats: ", updateChats);
-      return { chats: updateChats };
+
+    if (chatIndex === -1) {
+      return state;
     }
 
-    const newChat = {
-      chatId: message.originalChatId,
-      fullName: received.senderFullName,
-      userName: received.senderUserName,
-      lastActivityAt: message.createdAt,
-      lastMessage: message.messageText,
+    const updatedChat = {
+      ...state.chats[chatIndex],
       lastMessageAuthorId: message.senderId,
-      chatName: received.chatName,
+      lastMessage: message.messageText,
+      lastActivityAt: message.createdAt,
     };
-    const chatsCopy = { ...state.chats };
-    chatsCopy.unshift(newChat);
+
+    const updatedChats = state.chats.filter(
+      (c) => c.chatId !== updatedChat.chatId
+    );
+
+    updatedChats.unshift(updatedChat);
+
     return {
-      chats: chatsCopy,
+      chats: updatedChats,
     };
   }
+
   return state;
 };
-
 
 export default chatReducer;

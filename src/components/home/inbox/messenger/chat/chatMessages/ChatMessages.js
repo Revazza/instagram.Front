@@ -2,14 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ChatMessages.module.scss";
 import UserProfile from "../../../../../UI/userProfile/UserProfile";
 import MessageItem from "./messageItem/MessageItem";
+import ChatHubConnector from "../../../../../../store/hubs/ChatHubConnector";
+
+import { useDispatch } from "react-redux";
+import { AddMessage } from "../../../../../../store/actions/messageActions";
+import { updateChatList } from "../../../../../../store/actions/chatActions";
 
 function ChatMessages({ chat }) {
   const [messages, setMessages] = useState([]);
   const [participant, setParticipant] = useState();
 
-  const connection = null;
+  const connector = ChatHubConnector.getInstance();
   const lastMessageRef = useRef(null);
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (lastMessageRef.current) {
@@ -27,15 +32,16 @@ function ChatMessages({ chat }) {
   }, [chat]);
 
   useEffect(() => {
-    if (!connection) {
+    if (!connector) {
       return;
     }
-    connection.on("ReceiveMessage", handleMessageReceived);
-  }, [connection]);
+    connector.connection.on("ReceiveMessage", handleMessageReceived);
+  }, [connector]);
 
-  const handleMessageReceived = (received) => {
-    const { message } = received;
+  const handleMessageReceived = (message) => {
     setMessages((prevMessages) => [message, ...prevMessages]);
+    dispatch(AddMessage(message));
+    dispatch(updateChatList(message));
   };
 
   const showParticipantProfile = messages?.length === 0;

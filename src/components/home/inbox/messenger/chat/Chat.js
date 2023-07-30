@@ -6,28 +6,35 @@ import SendMessageBar from "./sendMessageBar/SendMessageBar";
 import { api } from "../../../../../Api";
 import ChatHubConnector from "../../../../../store/hubs/ChatHubConnector";
 import LoadingScreen from "../../../../UI/loading/LoadingScreen";
+import { useDispatch } from "react-redux";
+import { AddChatWithMessages } from "../../../../../store/actions/messageActions";
+import { useSelector } from "react-redux";
 
 function Chat() {
-  const [chat, setChat] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
+  const chat = useSelector((state) =>
+    state.chatMessages.chatMessages.find((cm) => cm.id === id)
+  );
   const connector = ChatHubConnector.getInstance();
-
-  useEffect(() => {
-    connector.connection.invoke("JoinChat", id);
-  }, [id]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!id) {
       return;
     }
+    if (chat) {
+      return;
+    }
+    connector.connection.invoke("JoinChat", id);
+
     setIsLoading(true);
     api
       .get(`/Chat/GetChatWithMessages?chatId=${id}`)
       .then((res) => {
         const chat = res.data.payload;
-        setChat(chat);
+        dispatch(AddChatWithMessages(chat));
       })
       .catch((err) => console.log("error: ", err))
       .finally(() => setIsLoading(false));
@@ -49,7 +56,7 @@ function Chat() {
             </div>
           </div>
           <div className={styles.chat_messages}>
-            <ChatMessages chat={chat} />
+            <ChatMessages chat={chat} chatId={chat.id} />
           </div>
           <div className={styles.send_message_bar}>
             <SendMessageBar chat={chat} />
