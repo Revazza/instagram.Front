@@ -10,11 +10,13 @@ import Chat from "./components/home/inbox/messenger/chat/Chat";
 import Main from "./components/home/main/Main";
 import useAuthRedirerct from "./hooks/useAuthRedirerct";
 import useNotificationHubConnection from "./hooks/useNotificationHubConnection";
+import NotificationHubConnector from "./store/hubs/NotificationHubConnector";
 
 function App() {
   useAuthRedirerct();
-  useNotificationHubConnection();
 
+  const connection = NotificationHubConnector.getInstance();
+  
   return (
     <div className="App">
       <Routes>

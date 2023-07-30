@@ -3,13 +3,14 @@ import styles from "./SendMessageBar.module.scss";
 import Emojis from "../../../../../UI/emojis/Emojis";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
+import ChatHubConnector from "../../../../../../store/hubs/ChatHubConnector";
 
 function SendMessageBar({ chat }) {
   const [message, setMessage] = useState("");
   const [user, setUser] = useState();
 
-  const connection = null;
-  
+  const connector = ChatHubConnector.getInstance();
+
   useEffect(() => {
     const token = Cookies.get("token");
     const decodedJwt = jwtDecode(token);
@@ -35,7 +36,8 @@ function SendMessageBar({ chat }) {
       chatName: chat.chatName,
     };
     console.log("Request: ", request);
-    connection.invoke("SendMessage", request);
+    console.log(connector);
+    connector.connection.invoke("SendMessage", request);
 
     setMessage("");
   };

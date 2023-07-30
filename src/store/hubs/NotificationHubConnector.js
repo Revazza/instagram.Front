@@ -10,9 +10,6 @@ class NotificationHubConnector {
   }
 
   static getInstance() {
-    if (!Cookies.get("token")) {
-      return null;
-    }
     if (!NotificationHubConnector.connection) {
       NotificationHubConnector.connection = new NotificationHubConnector();
     }

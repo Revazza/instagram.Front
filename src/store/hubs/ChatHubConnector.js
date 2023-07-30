@@ -3,20 +3,21 @@ import { CHAT_HUB_URL } from "../../Api";
 import Cookies from "js-cookie";
 
 class ChatHubConnector {
-  constructor() {
+  constructor(setLoadingFalse) {
     this.startConnection().then(() => {
-      console.log("SignalR ChatHub connection established");
+      console.log("ChatHub connection established");
+      setLoadingFalse();
     });
   }
 
-  static getInstance() {
-    if (!Cookies.get("token")) {
-      return null;
+  static createConnection(setLoadingFalse) {
+    if (ChatHubConnector.connection) {
+      return;
     }
-    if (!ChatHubConnector.connection) {
-      ChatHubConnector.connection = new ChatHubConnector();
-    }
+    ChatHubConnector.connection = new ChatHubConnector(setLoadingFalse);
+  }
 
+  static getInstance() {
     return ChatHubConnector.connection;
   }
 
@@ -34,7 +35,7 @@ class ChatHubConnector {
     try {
       await this.connection.start();
     } catch (error) {
-      console.error("Error starting SignalR connection:", error);
+      console.error("Error starting ChatHub connection:", error);
     }
   }
 }

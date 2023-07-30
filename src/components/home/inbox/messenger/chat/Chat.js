@@ -4,13 +4,19 @@ import { useParams } from "react-router-dom";
 import ChatMessages from "./chatMessages/ChatMessages";
 import SendMessageBar from "./sendMessageBar/SendMessageBar";
 import { api } from "../../../../../Api";
-
+import ChatHubConnector from "../../../../../store/hubs/ChatHubConnector";
+import LoadingScreen from "../../../../UI/loading/LoadingScreen";
 
 function Chat() {
-  console.log("chat is running");
   const [chat, setChat] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
+
+  const connector = ChatHubConnector.getInstance();
+
+  useEffect(() => {
+    connector.connection.invoke("JoinChat", id);
+  }, [id]);
 
   useEffect(() => {
     if (!id) {
@@ -31,15 +37,7 @@ function Chat() {
 
   return (
     <div className={styles.container}>
-      {isLoading && (
-        <div className={styles.loading_wrapper}>
-          <img
-            className={styles.loading_gif}
-            src="/images/loading.gif"
-            alt="loading"
-          />
-        </div>
-      )}
+      {isLoading && <LoadingScreen height={70} width={70} />}
       {showChat && (
         <React.Fragment>
           <div className={styles.header}>

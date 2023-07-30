@@ -4,9 +4,11 @@ import FriendMessageItem from "./friendsListItem/FriendMessageItem";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { api } from "../../../../Api";
+import LoadingScreen from "../../../UI/loading/LoadingScreen";
 
 export const FriendMessageListWrapper = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [chats, setChats] = useState([]);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -14,18 +16,19 @@ export const FriendMessageListWrapper = () => {
     setIsLoading(true);
     api
       .get(`/Chat/GetUserChats?userId=${credentials.sub}&limit=${30}`)
-      .then((res) => {})
+      .then((res) => {
+        setChats(res.data.payload.chats);
+      })
       .catch((err) => console.log("GetUserChats Error: ", err))
       .finally(() => setIsLoading(false));
   }, []);
 
-  return <FriendsMessageList isLoading={isLoading} />;
+  return <FriendsMessageList isLoading={isLoading} chats={chats} />;
 };
 
-function FriendsMessageList({ isLoading }) {
+function FriendsMessageList({ isLoading, chats }) {
   const [currentUser, setCurrentUser] = useState();
 
-  const chats = [];
   useEffect(() => {
     const token = Cookies.get("token");
     const credentials = jwtDecode(token);
@@ -46,9 +49,7 @@ function FriendsMessageList({ isLoading }) {
         <p id={styles.messages_requestP}>Requests</p>
       </div>
       <div className={styles.friends_container}>
-        {isLoading && (
-          <img className={styles.img} src="/images/loading.gif" alt="Loading" />
-        )}
+        {isLoading && <LoadingScreen height={50} width={50}/>}
         {showChats &&
           chats?.map((chat) => {
             return (
