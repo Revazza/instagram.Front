@@ -3,17 +3,18 @@ import { NOTIFICATION_HUB_URL } from "../../Api";
 import Cookies from "js-cookie";
 
 class NotificationHubConnector {
-  constructor() {
+  constructor(getNotificationHubConnection) {
     this.startConnection().then(() => {
       console.log("SignalR NotificationHub connection established");
+      getNotificationHubConnection(this.connection);
     });
   }
 
-  static createConnection() {
+  static createConnection(getNotificationHubConnection) {
     if (NotificationHubConnector.connection) {
       return;
     }
-    NotificationHubConnector.connection = new NotificationHubConnector();
+    NotificationHubConnector.connection = new NotificationHubConnector(getNotificationHubConnection);
   }
 
   static getInstance() {

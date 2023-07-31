@@ -3,18 +3,19 @@ import { CHAT_HUB_URL } from "../../Api";
 import Cookies from "js-cookie";
 
 class ChatHubConnector {
-  constructor(setLoadingFalse) {
+  constructor(getChatHubConnection) {
     this.startConnection().then(() => {
       console.log("ChatHub connection established");
-      setLoadingFalse();
+      getChatHubConnection(this.connection);
     });
   }
 
-  static createConnection(setLoadingFalse) {
+  static createConnection(getChatHubConnection) {
     if (ChatHubConnector.connection) {
+      getChatHubConnection(null);
       return;
     }
-    ChatHubConnector.connection = new ChatHubConnector(setLoadingFalse);
+    ChatHubConnector.connection = new ChatHubConnector(getChatHubConnection);
   }
 
   static getInstance() {

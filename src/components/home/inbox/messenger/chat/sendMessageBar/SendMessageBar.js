@@ -4,11 +4,16 @@ import Emojis from "../../../../../UI/emojis/Emojis";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import ChatHubConnector from "../../../../../../store/hubs/ChatHubConnector";
+import { useDispatch } from "react-redux";
+import { AddMessage } from "../../../../../../store/actions/messageActions";
+import { updateChatList } from "../../../../../../store/actions/chatActions";
 
 function SendMessageBar({ chat }) {
   const [message, setMessage] = useState("");
   const [user, setUser] = useState();
   const connector = ChatHubConnector.getInstance();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -32,6 +37,7 @@ function SendMessageBar({ chat }) {
       senderFullName: user.fullName,
       senderUserName: user.userName,
       chatName: chat.chatName,
+      createdAt: new Date(),
     };
     connector.connection.invoke("SendMessage", request);
     setMessage("");

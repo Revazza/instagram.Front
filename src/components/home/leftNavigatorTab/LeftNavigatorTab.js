@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./LeftNavigatorTab.module.scss";
 import { tabs as tabLinks, homeTab } from "./LeftNavigatorTabLinks";
-import LooseTab from "./tabsLayout/looseTab/LooseTab";
 import ShrinkedTab from "./tabsLayout/shrinkedTab/ShrinkedTab";
 import { Link, useParams } from "react-router-dom";
 import SearchTab from "./searchTab/SearchTab";
 import Notification from "../notification/Notification";
 import ParentTab from "./tabsLayout/parentTab/ParentTab";
+
 
 function LeftNavigatorTab() {
   const [activeTab, setActiveTab] = useState(1);

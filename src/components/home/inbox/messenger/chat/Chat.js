@@ -17,6 +17,7 @@ function Chat() {
   const chat = useSelector((state) =>
     state.chatMessages.chatMessages.find((cm) => cm.id === id)
   );
+
   const connector = ChatHubConnector.getInstance();
   const dispatch = useDispatch();
 
@@ -27,7 +28,6 @@ function Chat() {
     if (chat) {
       return;
     }
-    connector.connection.invoke("JoinChat", id);
 
     setIsLoading(true);
     api

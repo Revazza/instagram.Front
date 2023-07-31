@@ -4,17 +4,20 @@ import UserProfile from "../../../../../UI/userProfile/UserProfile";
 import MessageItem from "./messageItem/MessageItem";
 import ChatHubConnector from "../../../../../../store/hubs/ChatHubConnector";
 
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AddMessage } from "../../../../../../store/actions/messageActions";
 import { updateChatList } from "../../../../../../store/actions/chatActions";
 
 function ChatMessages({ chat }) {
-  const [messages, setMessages] = useState([]);
   const [participant, setParticipant] = useState();
 
-  const connector = ChatHubConnector.getInstance();
+  const messages = useSelector(
+    (state) =>
+      state.chatMessages.chatMessages.find((cm) => cm.id === chat?.id)
+        ?.chatMessages
+  );
+
   const lastMessageRef = useRef(null);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (lastMessageRef.current) {
@@ -28,21 +31,7 @@ function ChatMessages({ chat }) {
     }
 
     setParticipant(chat.participant);
-    setMessages(chat.chatMessages);
   }, [chat]);
-
-  useEffect(() => {
-    if (!connector) {
-      return;
-    }
-    connector.connection.on("ReceiveMessage", handleMessageReceived);
-  }, [connector]);
-
-  const handleMessageReceived = (message) => {
-    setMessages((prevMessages) => [message, ...prevMessages]);
-    dispatch(AddMessage(message));
-    dispatch(updateChatList(message));
-  };
 
   const showParticipantProfile = messages?.length === 0;
 
