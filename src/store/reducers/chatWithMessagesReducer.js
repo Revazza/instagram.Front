@@ -19,8 +19,6 @@ export const chatWithMessagesReducer = (state = initialState, action) => {
   }
 
   if (action.type === UPDATE_CHAT_MESSAGES_STATUS) {
-    console.log(" I M HERE FINNALY: ", action.payload);
-    console.log(state.chats);
     const { chatId, status } = action.payload;
     const chat = { ...state.chats.find((c) => c.id === chatId) };
     if (!chat) {

@@ -47,7 +47,6 @@ function Register() {
     e.preventDefault();
     try {
       const response = await api.post("/User/CreateUser", inputs);
-      console.log(response);
       if (response.data.status === 1) {
         setErrors(response.data.errors);
         return;
