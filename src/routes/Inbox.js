@@ -6,8 +6,15 @@ import useAuthRedirerct from "../hooks/useAuthRedirerct";
 import ChatHubConnector from "../store/hubs/ChatHubConnector";
 import LoadingScreen from "../components/UI/loading/LoadingScreen";
 import { useDispatch } from "react-redux";
-import { AddMessage } from "../store/actions/messageActions";
-import { updateChatList } from "../store/actions/chatActions";
+import {
+  UPDATE_CHAT_LAST_MESSAGE_STATUS,
+  updateChatLastMessageStatus,
+  updateChatsOnMessageReceive,
+} from "../store/actions/chatActions";
+import {
+  addMessageToChat,
+  updateChatMessagesStatus,
+} from "../store/actions/chatWithMessagesActions";
 
 function Inbox() {
   useAuthRedirerct();
@@ -15,16 +22,21 @@ function Inbox() {
   const dispatch = useDispatch();
 
   const handleMessageReceived = (message) => {
-    dispatch(AddMessage(message));
-    dispatch(updateChatList(message));
+    dispatch(addMessageToChat(message));
+    dispatch(updateChatsOnMessageReceive(message));
   };
-  
+  const handleChatMessagesStatusUpdate = (response) => {
+    dispatch(updateChatLastMessageStatus(response));
+    dispatch(updateChatMessagesStatus(response));
+  };
+
   const getChatHubConnection = (connection) => {
     setIsLoading(false);
     if (!connection) {
       return;
     }
     connection?.on("UpdateChat", handleMessageReceived);
+    connection?.on("UpdateChatMessagesStatus", handleChatMessagesStatusUpdate);
   };
 
   if (isLoading) {

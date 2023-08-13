@@ -2,20 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ChatMessages.module.scss";
 import UserProfile from "../../../../../UI/userProfile/UserProfile";
 import MessageItem from "./messageItem/MessageItem";
-import ChatHubConnector from "../../../../../../store/hubs/ChatHubConnector";
 
-import { useSelector, useDispatch } from "react-redux";
-import { AddMessage } from "../../../../../../store/actions/messageActions";
-import { updateChatList } from "../../../../../../store/actions/chatActions";
 
 function ChatMessages({ chat }) {
   const [participant, setParticipant] = useState();
-
-  const messages = useSelector(
-    (state) =>
-      state.chatMessages.chatMessages.find((cm) => cm.id === chat?.id)
-        ?.chatMessages
-  );
+  const [messages,setMessages] = useState();
+  
 
   const lastMessageRef = useRef(null);
 
@@ -30,6 +22,7 @@ function ChatMessages({ chat }) {
       return;
     }
 
+    setMessages(chat.chatMessages);
     setParticipant(chat.participant);
   }, [chat]);
 

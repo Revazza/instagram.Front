@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import notificationReducer from "./notificationReducer";
-import chatReducer from "./chatReducer";
-import chatMessageReducer from "./chatMessageReducer";
+import { chatReducer } from "./chatReducer";
+import { chatWithMessagesReducer } from "./chatWithMessagesReducer";
 
 const rootReducer = combineReducers({
   notifications: notificationReducer,
   chats: chatReducer,
-  chatMessages  : chatMessageReducer,
+  chatsWithMessages: chatWithMessagesReducer,
 });
 
 export default rootReducer;

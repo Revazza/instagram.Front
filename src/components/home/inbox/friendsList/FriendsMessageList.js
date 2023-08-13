@@ -6,12 +6,12 @@ import jwtDecode from "jwt-decode";
 import { api } from "../../../../Api";
 import LoadingScreen from "../../../UI/loading/LoadingScreen";
 import { useDispatch, useSelector } from "react-redux";
-import { handleChatsInitialization } from "../../../../store/actions/chatActions";
+import { initializeChats } from "../../../../store/actions/chatActions";
 
 export const FriendMessageListWrapper = () => {
   const [isLoading, setIsLoading] = useState(false);
-
   const dispatch = useDispatch();
+
   const chats = useSelector((state) => state.chats.chats);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const FriendMessageListWrapper = () => {
       .get(`/Chat/GetUserChats?userId=${credentials.sub}&limit=${30}`)
       .then((res) => {
         const chats = res.data.payload.chats;
-        dispatch(handleChatsInitialization(chats));
+        dispatch(initializeChats(chats));
       })
       .catch((err) => console.log("GetUserChats Error: ", err))
       .finally(() => setIsLoading(false));

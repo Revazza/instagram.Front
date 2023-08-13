@@ -6,26 +6,29 @@ import SendMessageBar from "./sendMessageBar/SendMessageBar";
 import { api } from "../../../../../Api";
 import ChatHubConnector from "../../../../../store/hubs/ChatHubConnector";
 import LoadingScreen from "../../../../UI/loading/LoadingScreen";
-import { useDispatch } from "react-redux";
-import { AddChatWithMessages } from "../../../../../store/actions/messageActions";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addChatWithMessages,
+  setActiveChat,
+} from "../../../../../store/actions/chatWithMessagesActions";
 
 function Chat() {
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
-  const chat = useSelector((state) =>
-    state.chatMessages.chatMessages.find((cm) => cm.id === id)
-  );
-
   const connector = ChatHubConnector.getInstance();
   const dispatch = useDispatch();
+
+  const chat = useSelector((state) =>
+    state.chatsWithMessages.chats.find((c) => c.id === id)
+  );
 
   useEffect(() => {
     if (!id) {
       return;
     }
     if (chat) {
+      dispatch(setActiveChat(chat));
       return;
     }
 
@@ -34,7 +37,8 @@ function Chat() {
       .get(`/Chat/GetChatWithMessages?chatId=${id}`)
       .then((res) => {
         const chat = res.data.payload;
-        dispatch(AddChatWithMessages(chat));
+        dispatch(setActiveChat(chat));
+        dispatch(addChatWithMessages(chat));
       })
       .catch((err) => console.log("error: ", err))
       .finally(() => setIsLoading(false));

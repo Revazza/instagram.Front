@@ -21,7 +21,11 @@ function FriendMessageItem({ currentUserId, chat }) {
   }, [chat?.lastActivityAt]);
 
   const isCurrentUserLastMessageAuthor =
-    chat?.lastMessageAuthorId === currentUserId;
+    chat?.lastMessage?.senderId === currentUserId;
+
+  const isLastMessageSeen =
+    isCurrentUserLastMessageAuthor ||
+    (!isCurrentUserLastMessageAuthor && chat?.lastMessage?.status === "Seen");
 
   return (
     <div className={styles.container} onClick={handleChatClick}>
@@ -29,11 +33,14 @@ function FriendMessageItem({ currentUserId, chat }) {
         <div className={styles.img_wrapper}>
           <img src="/images/reels_active.png" alt="reels" />
         </div>
-        <div className={styles.friend_info_wrapper}>
+        <div
+          className={styles.friend_info_wrapper}
+          id={!isLastMessageSeen ? styles.chatNotSeen : ""}
+        >
           <p id={styles.fullNameP}>{chat?.chatName}</p>
           <p id={styles.lastMessageP}>
             {isCurrentUserLastMessageAuthor && "You: "}
-            {chat?.lastMessage || "No messages"}
+            {chat?.lastMessage?.messageText || "No messages"}
             {timeDifference}
           </p>
         </div>

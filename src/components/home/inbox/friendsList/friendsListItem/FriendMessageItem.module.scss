@@ -13,7 +13,6 @@
 .container:hover {
   background-color: $theLightestGray;
   transition: 300ms;
-  
 }
 
 .friend_message_wrapper {
@@ -48,4 +47,11 @@
   margin-top: 5px;
   font-size: 11px;
   color: $lightDarkGray;
+}
+
+#chatNotSeen {
+  p {
+    font-weight: bold;
+    color: black;
+  }
 }

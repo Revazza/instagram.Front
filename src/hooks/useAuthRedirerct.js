@@ -10,6 +10,12 @@ function useAuthRedirerct() {
   useEffect(() => {
     const token = Cookies.get("token");
 
+    const currentLoc = window.location.href;
+
+    if (currentLoc.includes("/auth/register")) {
+      return;
+    }
+
     if (!token) {
       navigate("/auth/login");
       return;

@@ -1,21 +1,26 @@
-export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
-
-export const updateChatList = (received) => {
-  return {
-    type: RECEIVE_MESSAGE,
-    payload: received,
-  };
-};
-
 export const INITIALIZE_CHATS = "INITIALIZE_CHATS";
-
-export const handleChatsInitialization = (chats) => {
+export const initializeChats = (chats) => {
   return {
     type: INITIALIZE_CHATS,
     payload: chats,
   };
 };
 
-export const getChatById = (state, chatId) => {
-  return state.chats?.chats?.find((chat) => chat?.chatId === chatId) || null;
+export const UPDATE_CHATS_ON_MESSAGE_RECEIVE =
+  "UPDATE_CHATS_ON_MESSAGE_RECEIVE";
+
+export const updateChatsOnMessageReceive = (newMessage) => {
+  return {
+    type: UPDATE_CHATS_ON_MESSAGE_RECEIVE,
+    payload: newMessage,
+  };
+};
+
+export const UPDATE_CHAT_LAST_MESSAGE_STATUS =
+  "UPDATE_CHAT_LAST_MESSAGE_STATUS";
+export const updateChatLastMessageStatus = (obj) => {
+  return {
+    type: UPDATE_CHAT_LAST_MESSAGE_STATUS,
+    payload: obj,
+  };
 };
