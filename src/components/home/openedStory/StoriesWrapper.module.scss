@@ -1,0 +1,25 @@
+@import "../../../Variables.scss";
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  background-color: #1a1a1a;
+  display: flex;
+  
+}
+
+.logo_wrapper{
+  height: 100%;
+  width: 8%;
+  h1 {
+    @include InstagramHTag;
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+    position: relative;
+    top: 13px;
+    left: 15px;
+    width: fit-content;
+  }
+}

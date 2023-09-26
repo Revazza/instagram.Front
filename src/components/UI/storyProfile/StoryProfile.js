@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./StoryProfile.module.scss";
+import { useNavigate } from "react-router-dom";
 
 function StoryProfile({ height, width, className }) {
+  const navigate = useNavigate();
   const generateRandomProfile = () => {
     //for test purposes only
     const randomData = [
@@ -17,10 +19,15 @@ function StoryProfile({ height, width, className }) {
     const randomIndex = Math.floor(Math.random() * randomData.length);
     return randomData[randomIndex];
   };
+
+  const showStory = () => {
+    navigate("/stories");
+  };
+
   const randomProfileUrl = `/images/${generateRandomProfile()}.png`;
   const classes = `${styles.img_wrapper} ${className}`;
   return (
-    <div className={classes}>
+    <div className={classes} onClick={showStory}>
       <div
         style={{ height, width }}
         className={styles.rainbow_border}

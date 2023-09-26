@@ -9,6 +9,8 @@ import Messenger from "./components/home/inbox/messenger/Messenger";
 import Chat from "./components/home/inbox/messenger/chat/Chat";
 import Main from "./components/home/main/Main";
 import useAuthRedirerct from "./hooks/useAuthRedirerct";
+import Stories from "./routes/Stories";
+import OpenedStoryList from "./components/home/openedStory/openedStoryList/OpenedStoryList";
 
 function App() {
   useAuthRedirerct();
@@ -22,6 +24,9 @@ function App() {
             <Route index element={<Messenger />} />
             <Route path=":id" element={<Chat />} />
           </Route>
+        </Route>
+        <Route path="stories" element={<Stories />}>
+          <Route path=":username/:storyId" element={<OpenedStoryList />} />
         </Route>
         <Route path="/auth" element={<Authentication />}>
           <Route path="register" element={<Register />} />
