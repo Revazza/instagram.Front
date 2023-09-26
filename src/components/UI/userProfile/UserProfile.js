@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./UserProfile.module.scss";
+import StoryProfile from '../../UI/storyProfile/StoryProfile';
+
 function UserProfile({ className, user, children }) {
   const navigate = useNavigate();
 
@@ -11,17 +13,9 @@ function UserProfile({ className, user, children }) {
 
   const classes = `${styles.container} ${className}`;
   return (
-    <div className={classes} onClick={handleProfileClick}>
-      <div className={styles.img_wrapper}>
-        <div className={styles.rainbow_border} id={styles.rainbowBorder}>
-          <div className={styles.white_border}>
-            <div className={styles.img_layout}>
-              <img src="/images/reels_active.png" alt="MUST BE CHANGED" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.info}>
+    <div className={classes}>
+      <StoryProfile />
+      <div className={styles.info} onClick={handleProfileClick}>
         <div className={styles.username}>
           <p>{user?.userName || "shilstone_art"}</p>
         </div>

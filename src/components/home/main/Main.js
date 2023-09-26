@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./Main.module.scss";
 import RightNavigatorTab from "../rightNavigatorTab/RightNavigatorTab";
+import StoryList from "./story/StoryList";
 
 function Main() {
   return (
     <div className={styles.container}>
-      <div className={styles.main_container}>Main</div>
+      <StoryList />
       <RightNavigatorTab />
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./FriendMessageItem.module.scss";
 import { useNavigate } from "react-router-dom";
 import { convertDateTimeToHumanReadable } from "../../../../../helperFunctions/helperFunctions";
+import StoryProfile from "../../../../UI/storyProfile/StoryProfile";
 
 function FriendMessageItem({ currentUserId, chat }) {
   const navigate = useNavigate();
@@ -28,14 +29,13 @@ function FriendMessageItem({ currentUserId, chat }) {
     (!isCurrentUserLastMessageAuthor && chat?.lastMessage?.status === "Seen");
 
   return (
-    <div className={styles.container} onClick={handleChatClick}>
+    <div className={styles.container}>
       <div className={styles.friend_message_wrapper}>
-        <div className={styles.img_wrapper}>
-          <img src="/images/reels_active.png" alt="reels" />
-        </div>
+        <StoryProfile />
         <div
           className={styles.friend_info_wrapper}
           id={!isLastMessageSeen ? styles.chatNotSeen : ""}
+          onClick={handleChatClick}
         >
           <p id={styles.fullNameP}>{chat?.chatName}</p>
           <p id={styles.lastMessageP}>

@@ -11,6 +11,7 @@ import {
   addChatWithMessages,
   setActiveChat,
 } from "../../../../../store/actions/chatWithMessagesActions";
+import StoryProfile from "../../../../UI/storyProfile/StoryProfile";
 
 function Chat() {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,9 +54,7 @@ function Chat() {
         <React.Fragment>
           <div className={styles.header}>
             <div className={styles.profile}>
-              <div className={styles.img_wrapper}>
-                <img src="/images/reels_active.png" alt="profile" />
-              </div>
+              <StoryProfile />
               <p className={styles.userName}>{chat?.participant?.userName}</p>
             </div>
           </div>
