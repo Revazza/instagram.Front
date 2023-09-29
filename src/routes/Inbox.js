@@ -8,6 +8,7 @@ import LoadingScreen from "../components/UI/loading/LoadingScreen";
 import { useDispatch } from "react-redux";
 import {
   UPDATE_CHAT_LAST_MESSAGE_STATUS,
+  insertNewChat,
   updateChatLastMessageStatus,
   updateChatsOnMessageReceive,
 } from "../store/actions/chatActions";
@@ -29,12 +30,18 @@ function Inbox() {
     dispatch(updateChatLastMessageStatus(response));
     dispatch(updateChatMessagesStatus(response));
   };
+  const handleNewChatAdd = (chat) =>{
+    console.log("i am here")
+    dispatch(insertNewChat(chat));
+    dispatch(addMessageToChat(chat.chatMessages.at(-1)));
+  }
 
   const getChatHubConnection = (connection) => {
     setIsLoading(false);
     if (!connection) {
       return;
     }
+    connection?.on("AddNewChat",handleNewChatAdd)
     connection?.on("UpdateChat", handleMessageReceived);
     connection?.on("UpdateChatMessagesStatus", handleChatMessagesStatusUpdate);
   };

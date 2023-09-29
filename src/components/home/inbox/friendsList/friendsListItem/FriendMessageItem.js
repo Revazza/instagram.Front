@@ -28,6 +28,9 @@ function FriendMessageItem({ currentUserId, chat }) {
     isCurrentUserLastMessageAuthor ||
     (!isCurrentUserLastMessageAuthor && chat?.lastMessage?.status === "Seen");
 
+  const participant = chat?.participants?.find(p => p.id !== currentUserId);
+  const chatName = chat?.chatName?.length === 0 ? participant?.fullName : chat?.chatName;
+
   return (
     <div className={styles.container}>
       <div className={styles.friend_message_wrapper}>
@@ -37,7 +40,7 @@ function FriendMessageItem({ currentUserId, chat }) {
           id={!isLastMessageSeen ? styles.chatNotSeen : ""}
           onClick={handleChatClick}
         >
-          <p id={styles.fullNameP}>{chat?.chatName}</p>
+          <p id={styles.fullNameP}>{chatName}</p>
           <p id={styles.lastMessageP}>
             {isCurrentUserLastMessageAuthor && "You: "}
             {chat?.lastMessage?.messageText || "No messages"}

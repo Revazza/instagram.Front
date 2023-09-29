@@ -52,7 +52,6 @@ export const chatWithMessagesReducer = (state = initialState, action) => {
 
     const updatedChats = state.chats.filter((c) => c.id !== originalChatId);
     updatedChats.unshift(chat);
-
     return {
       ...state,
       chats: updatedChats,

@@ -24,6 +24,8 @@ function Chat() {
     state.chatsWithMessages.chats.find((c) => c.id === id)
   );
 
+  console.log("Chat: ", chat);
+
   useEffect(() => {
     if (!id) {
       return;

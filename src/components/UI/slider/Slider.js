@@ -5,9 +5,9 @@ function Slider({ sliderClassName, data, chunkSize }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderStyle, setSliderStyle] = useState(``);
   const sliderClass = `${styles.slider} ${sliderClassName}`;
-  const max_page = Math.floor(data?.length / chunkSize);
+  const max_page = Math.ceil(data?.length / chunkSize);
   const showLeftArrow = currentSlide != 0;
-  const showRightArrow = currentSlide != max_page;
+  const showRightArrow = currentSlide + 1 != max_page;
 
   const moveLeft = () => {
     setCurrentSlide((prevState) => --prevState);

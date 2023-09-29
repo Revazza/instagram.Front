@@ -1,5 +1,6 @@
 import {
   INITIALIZE_CHATS,
+  INSERT_NEW_CHAT,
   UPDATE_CHATS_ON_MESSAGE_RECEIVE,
   UPDATE_CHAT_LAST_MESSAGE_STATUS,
 } from "../actions/chatActions";
@@ -10,9 +11,27 @@ const initialState = {
 
 export const chatReducer = (state = initialState, action) => {
   if (action.type === INITIALIZE_CHATS) {
+    const fetchedChats = action.payload;
+    const chats = fetchedChats.map((c) => {
+      return {
+        ...c,
+        lastMessage: c.chatMessages.at(-1),
+      };
+    });
+
     return {
       ...state,
-      chats: action.payload,
+      chats,
+    };
+  }
+
+  if (action.type === INSERT_NEW_CHAT) {
+    const newChat = action.payload;
+    const chat = { ...newChat, lastMessage: newChat.chatMessages.at(-1) };
+    const chats = [chat, ...state.chats];
+    return {
+      ...state,
+      chats,
     };
   }
 

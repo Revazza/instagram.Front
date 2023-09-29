@@ -16,6 +16,15 @@ export const updateChatsOnMessageReceive = (newMessage) => {
   };
 };
 
+export const INSERT_NEW_CHAT = "INSERT_NEW_CHAT";
+
+export const insertNewChat = (newChat) => {
+  return {
+    type: INSERT_NEW_CHAT,
+    payload: newChat,
+  };
+};
+
 export const UPDATE_CHAT_LAST_MESSAGE_STATUS =
   "UPDATE_CHAT_LAST_MESSAGE_STATUS";
 export const updateChatLastMessageStatus = (obj) => {

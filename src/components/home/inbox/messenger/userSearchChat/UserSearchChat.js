@@ -27,7 +27,9 @@ function UserSearchChat({ handlePopUpClose, open }) {
       creatorId: credentials.sub,
       participantId: user.id,
     };
-    api.post(`/Chat/CreateChat`, request).then((res) => navigate(res.data.payload.chatId));
+    api.post(`/Chat/CreateChat`, request).then((res) => {
+      navigate(res.data.payload.chatId)
+    });
   };
 
   return (

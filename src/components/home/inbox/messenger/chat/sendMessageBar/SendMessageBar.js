@@ -6,6 +6,7 @@ import jwtDecode from "jwt-decode";
 import ChatHubConnector from "../../../../../../store/hubs/ChatHubConnector";
 import { useDispatch } from "react-redux";
 import {
+  insertNewChat,
   updateChatLastMessageStatus,
   updateChatsOnMessageReceive,
 } from "../../../../../../store/actions/chatActions";
@@ -32,7 +33,7 @@ function SendMessageBar({ chat }) {
     }
     //chat is reversed so last message is first message
     const lastMessage = chat.chatMessages[0];
-    if (lastMessage.senderId === user.sub || lastMessage.status === "Seen") {
+    if (lastMessage?.senderId === user.sub || lastMessage?.status === "Seen") {
       return;
     }
     connector.connection
@@ -63,14 +64,22 @@ function SendMessageBar({ chat }) {
     if (message.length === 0) {
       return;
     }
+    const isFirstMessage = chat.chatMessages.length === 0;
+    console.log(isFirstMessage);
     const request = {
       message,
       chatId: chat.id,
       receiverId: chat.participant.id,
+      isFirstMessage,
     };
-    connector.connection.invoke("SendMessage", request).then((newMessage) => {
-      dispatch(updateChatsOnMessageReceive(newMessage));
-      dispatch(addMessageToChat(newMessage));
+    connector.connection.invoke("SendMessage", request).then((updatedChat) => {
+      if (isFirstMessage) {
+        dispatch(insertNewChat(updatedChat));
+      } else {
+        dispatch(updateChatsOnMessageReceive(updatedChat.chatMessages.at(-1)));
+      }
+
+      dispatch(addMessageToChat(updatedChat.chatMessages.at(-1)));
     });
     setMessage("");
   };
