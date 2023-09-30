@@ -20,3 +20,7 @@ export const convertDateTimeToHumanReadable = (dateTime) => {
   }
   return ` · ${seconds}s`;
 };
+
+export const createMediaUrl = (category, format, url) => {
+  return `data:${category}/${format};base64,${url}`;
+};

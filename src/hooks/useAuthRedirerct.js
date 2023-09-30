@@ -22,7 +22,12 @@ function useAuthRedirerct() {
     }
 
     try {
-      jwtDecode(token);
+      const tokenData = jwtDecode(token);
+      const expirationDate = new Date(tokenData.exp * 1000);
+      const currentDate = new Date();
+      if (currentDate > expirationDate) {
+        throw new Error("Invalid Token");
+      }
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     } catch (error) {
       Cookies.remove("token");

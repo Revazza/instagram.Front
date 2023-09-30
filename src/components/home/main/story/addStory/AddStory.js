@@ -9,6 +9,7 @@ function AddStory() {
   const [openViewStory, setOpenViewStory] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [errorMsg, setErrorMsg] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleAddStory = () => {
@@ -34,6 +35,7 @@ function AddStory() {
   const handleStoryUpload = () => {
     const formData = new FormData();
     formData.append("file", selectedFile);
+    setIsLoading(true);
     api
       .post("/Story/AddStory", formData, {
         headers: {
@@ -41,11 +43,18 @@ function AddStory() {
         },
       })
       .then((res) => {
-        const result = res.data.result;
+        const result = res.data;
+        console.log(result);
         if (result.status === 1) {
           setErrorMsg(result.errors[0]);
           return;
         }
+        setIsLoading(false)
+        handleCloseViewStory();
+
+      })
+      .catch((err)=>{
+        setIsLoading(false)
       });
   };
 
