@@ -3,37 +3,22 @@ import styles from "./OpenedStoryList.module.scss";
 import OpenedStoryItem from "../openedStoryItem/OpenedStoryItem";
 import Stories from "react-insta-stories";
 import { api } from "../../../../Api";
-import { convertDateTimeToHumanReadable } from "../../../../helperFunctions/helperFunctions";
-
-const dummyStories = [
-  {
-    url: "https://picsum.photos/1080/1920",
-    header: {
-      heading: "Mohit Karekar",
-      subheading: "Posted 5h ago",
-      profileImage: "https://picsum.photos/1000/1000",
-    },
-  },
-
-  {
-    url: "https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4",
-    type: "video",
-    duration: 1000,
-  },
-];
+import { useParams } from "react-router-dom";
 
 function OpenedStoryList() {
   const [stories, setStories] = useState([]);
 
+  const { userName } = useParams();
+
   useEffect(() => {
-    api.get("/Story/GetUserStoriesByStatus").then((res) => {
+    api.get(`/Story/GetActiveStoriesByUserName?userName=${userName}`).then((res) => {
       const stories = res.data.payload.stories;
       const convertedStories = stories.map((s) => {
         return {
           content: () => {
             return <OpenedStoryItem key={s.id} story={s} />;
-          }
-        }
+          },
+        };
       });
       setStories(convertedStories);
     });

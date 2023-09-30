@@ -5,10 +5,8 @@ import StoryProfile from "../../../../UI/storyProfile/StoryProfile";
 function StoryItem({ userName }) {
   return (
     <div className={styles.container}>
-      <StoryProfile width="60px" height="60px" />
-      <p id={styles.userName}>
-        {userName ? userName : "Username"}
-      </p>
+      <StoryProfile user={{ userName }} width="60px" height="60px" />
+      <p id={styles.userName}>{userName ? userName : "Username"}</p>
     </div>
   );
 }

@@ -5,22 +5,7 @@ import {
   createMediaUrl,
 } from "../../../../helperFunctions/helperFunctions";
 import UserProfile from "../../../UI/userProfile/UserProfile";
-/*
-          id: s.id,
-          url: `data:${s.category}/${s.format};base64,${s.url}`,
-          duration: s.duration,
-          type: s.category,
-          header: {
-            heading: s.author.userName,
-            subheading: `${convertDateTimeToHumanReadable(s.uploadDate)} ago`,
-            profileImage: "/images/smile.png", //temporary,
-          },
-          styles: {
-            position: "relative",
-            left: "100px",
-          },
 
-*/
 function OpenedStoryItem({ story }) {
   const userName = `${story.author.userName} ${convertDateTimeToHumanReadable(
     story.uploadDate

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styles from "./Slider.module.scss";
 
-function Slider({ sliderClassName, data, chunkSize }) {
+function Slider({ sliderClassName, data, chunkSize, children }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderStyle, setSliderStyle] = useState(``);
   const sliderClass = `${styles.slider} ${sliderClassName}`;
@@ -32,9 +32,7 @@ function Slider({ sliderClassName, data, chunkSize }) {
         ref={sliderRef}
         style={{ transform: sliderStyle }}
       >
-        {data?.map((m, i) => {
-          return <React.Fragment key={i}>{m}</React.Fragment>;
-        })}
+        {children}
       </div>
       {showLeftArrow && (
         <div id={styles.left} className={styles.switch} onClick={moveLeft}>

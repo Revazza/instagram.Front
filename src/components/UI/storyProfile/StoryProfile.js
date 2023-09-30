@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./StoryProfile.module.scss";
 import { useNavigate } from "react-router-dom";
 
-function StoryProfile({ height, width, className }) {
+function StoryProfile({ user, height, width, className }) {
   const navigate = useNavigate();
   const generateRandomProfile = () => {
     //for test purposes only
@@ -21,7 +21,7 @@ function StoryProfile({ height, width, className }) {
   };
 
   const showStory = () => {
-    navigate("/stories");
+    navigate(`/stories/${user.userName}`);
   };
 
   const randomProfileUrl = `/images/${generateRandomProfile()}.png`;

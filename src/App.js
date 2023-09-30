@@ -26,7 +26,7 @@ function App() {
           </Route>
         </Route>
         <Route path="stories" element={<Stories />}>
-          <Route path=":username/:storyId" element={<OpenedStoryList />} />
+          <Route path=":userName" element={<OpenedStoryList />} />
         </Route>
         <Route path="/auth" element={<Authentication />}>
           <Route path="register" element={<Register />} />
