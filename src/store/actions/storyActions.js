@@ -5,3 +5,11 @@ export const addStory = (userStories) => {
     payload: userStories,
   };
 };
+
+export const DELETE_STORY = "DELETE_STORY";
+export const deleteStory = (storyToDelete) => {
+  return {
+    type: DELETE_STORY,
+    payload: storyToDelete,
+  };
+};

@@ -4,12 +4,25 @@ import OpenedStoryItem from "../openedStoryItem/OpenedStoryItem";
 import Stories from "react-insta-stories";
 import { api } from "../../../../Api";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addStory } from "../../../../store/actions/storyActions";
+import { storyReducer } from "../../../../store/reducers/storyReducer";
 
 function OpenedStoryList() {
-  const [stories, setStories] = useState([]);
   const { userName } = useParams();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const dispatch = useDispatch();
+
+  const userStories = useSelector((state) =>
+    state.stories.stories.find((s) => s.userName === userName)
+  );
 
   useEffect(() => {
+    if (userStories) {
+      setCurrentIndex(0);
+      return;
+    }
+
     api
       .get(`/Story/GetActiveStoriesByUserName?userName=${userName}`)
       .then((res) => {
@@ -18,20 +31,24 @@ function OpenedStoryList() {
           userName: userName,
           stories: stories,
         };
-        const convertedStories = convertStories(stories);
-        setStories(convertedStories);
+        dispatch(addStory(userStories));
       });
   }, []);
 
   const convertStories = (stories) => {
-    return stories.map((s) => {
+    if (!stories) {
+      return [];
+    }
+    return stories.map((s, index) => {
       return {
-        content: ({ action }) => {
+        content: (props) => {
+          console.log("props", props);
           return <OpenedStoryItem key={s.id} story={s} />;
         },
       };
     });
   };
+  const stories = convertStories(userStories?.stories);
 
   return (
     <div className={styles.container}>
@@ -45,11 +62,11 @@ function OpenedStoryList() {
             borderRadius: "10px",
             overflow: "hidden",
           }}
+          preloadCount={0}
           currentIndex={0}
           progressContainerStyles={{
             width: "100%",
           }}
-          // onAllStoriesEnd={onStoryEnd}
           keyboardNavigation={true}
         />
       )}

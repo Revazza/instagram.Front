@@ -28,7 +28,7 @@ function OpenedStoryItem({ story }) {
           className={styles.profile_styles}
         />
       </div>
-      <StoryDeleteButton storyId={story?.id} />
+      <StoryDeleteButton userName={userName} storyId={story?.id} />
       <div className={styles.box_shadow}></div>
     </div>
   );
