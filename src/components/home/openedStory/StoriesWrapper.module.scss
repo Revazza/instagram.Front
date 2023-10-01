@@ -6,7 +6,20 @@
   box-sizing: border-box;
   background-color: #1a1a1a;
   display: flex;
-  
+  position: relative;
+}
+
+.close{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  cursor: pointer;
+  top: 25px;
+  right: 30px;
+  img{
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .logo_wrapper{

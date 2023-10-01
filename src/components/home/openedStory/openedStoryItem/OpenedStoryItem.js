@@ -5,11 +5,11 @@ import {
   createMediaUrl,
 } from "../../../../helperFunctions/helperFunctions";
 import UserProfile from "../../../UI/userProfile/UserProfile";
+import StoryDeleteButton from "../storyDeleteButton/StoryDeleteButton";
 
 function OpenedStoryItem({ story }) {
-  const userName = `${story.author.userName} ${convertDateTimeToHumanReadable(
-    story.uploadDate
-  )}`;
+  const userName = `${story.author.userName}`;
+  const date = convertDateTimeToHumanReadable(story.uploadDate);
   return (
     <div className={styles.container}>
       <img
@@ -23,10 +23,12 @@ function OpenedStoryItem({ story }) {
             userName: userName,
             fullName: "",
           }}
+          additionalInfo={date}
           profileClassName={styles.story_profile}
           className={styles.profile_styles}
         />
       </div>
+      <StoryDeleteButton storyId={story?.id} />
       <div className={styles.box_shadow}></div>
     </div>
   );

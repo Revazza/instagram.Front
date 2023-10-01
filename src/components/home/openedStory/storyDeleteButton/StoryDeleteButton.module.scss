@@ -1,0 +1,14 @@
+@import '../../../../Variables.scss';
+
+.container {
+  position: absolute;
+  top: 25px;
+  right: 22px;
+  color: $errorRed;
+  cursor: pointer;
+  p{
+    text-transform: capitalize;
+    font-family: $fontSego;
+  }
+  z-index: 3000;
+}
